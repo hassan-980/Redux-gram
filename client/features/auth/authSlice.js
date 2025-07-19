@@ -1,0 +1,277 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+axios.defaults.withCredentials = true;
+import { useNavigate } from "react-router";
+import { createPost } from "../posts/postslice";
+
+export const fetchUser = createAsyncThunk(
+  "auth/fetchUser",
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.get(
+        "http://localhost:5000/api/user/get-user-data",
+        {
+          withCredentials: true,
+        }
+      );
+
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue("Session expired");
+    }
+  }
+);
+
+export const loginUser = createAsyncThunk(
+  "auth/loginUser",
+  async ({ email, password }, thunkAPI) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+export const verifyEmail = createAsyncThunk(
+  "auth/verifyEmail",
+  async (otp, thunkAPI) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/verify-email",
+        {
+          otp,
+        }
+      );
+
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const sendEmailVerifyOtp = createAsyncThunk(
+  "auth/sendverifyotp",
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/send-verify-otp",
+        {}, // no body data
+        { withCredentials: true } // send cookie
+      );
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.msg || "OTP send failed"
+      );
+    }
+  }
+);
+
+export const registerUser = createAsyncThunk(
+  "auth/registerUser",
+  async ({ username, email, password }, thunkAPI) => {
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/register", {
+        username,
+        email,
+        password,
+      });
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data.message);
+    }
+  }
+);
+
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:5000/api/auth/logout",
+      {}, // no body data
+      { withCredentials: true } // send cookie
+    );
+    return res.data;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(
+      err.response?.data?.msg || "OTP send failed"
+    );
+  }
+});
+
+export const sendResetPassOtp = createAsyncThunk(
+  "auth/sendResetPassOtp",
+  async ({email}, thunkAPI) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/send-reset-otp",
+        {email}, 
+        { withCredentials: true } // send cookie
+      );
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.msg || "OTP send failed"
+      );
+    }
+  }
+);
+
+
+
+export const setNewPass = createAsyncThunk(
+  "auth/setNewPass",
+  async ({email,otp,newpassword}, thunkAPI) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/verify-reset-otp",
+        {email,otp,newpassword}, 
+        { withCredentials: true }
+
+      );
+      return res.data;
+
+
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response?.data?.message || "OTP send failed"
+      );
+    }
+  }
+);
+
+
+
+
+
+
+
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState: {
+    username: null,
+    loggedIn: false,
+    loading: false,
+    error: null,
+    isverified: null,
+    success:null
+   
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.loggedIn = true;
+        state.username = action.payload.username;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      //
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.loggedIn = true;
+        state.username = action.payload.user.username;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // LOGOUT
+      .addCase(logout.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.loading = false;
+        state.loggedIn = false;
+        state.username = null;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.loading = false;
+      })
+
+      //EMAIL VERIFY
+      .addCase(verifyEmail.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(verifyEmail.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isverified = action.payload.isVerified;
+      })
+      .addCase(verifyEmail.rejected, (state, action) => {
+        state.loading = false;
+        state.user = null;
+        state.error = action.payload;
+      })
+            // FETCH DATA
+      .addCase(fetchUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.loggedIn = true;
+        state.username = action.payload.userData.username;
+        state.isverified = action.payload.userData.isVerified;
+      })
+      .addCase(fetchUser.rejected, (state, action) => {
+        state.loading = false;
+        state.user = null;
+      })
+
+      // CREATE POST
+      
+      // SEND OTP FOR RESET PASS
+            .addCase(sendResetPassOtp.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(sendResetPassOtp.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = action.payload.success;
+
+        state.error = action.payload.message;
+      })
+      .addCase(sendResetPassOtp.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+        state.success = action.payload.success;
+      })
+
+      // RESET NEW PASS
+      .addCase(setNewPass.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(setNewPass.fulfilled, (state, action) => {
+        state.error = action.payload.message;
+        state.loading = false;
+      })
+      .addCase(setNewPass.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    
+          
+      });
+      
+
+  },
+});
+
+export const {} = authSlice.actions;
+export default authSlice.reducer;
