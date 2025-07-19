@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
+const URL='https://redux-gram-server.onrender.com';
+
 export const createPost = createAsyncThunk(
   "post/createPost",
   async (data, thunkAPI) => {
@@ -28,7 +30,7 @@ export const getGlobalPosts = createAsyncThunk(
   'post/getGlobalPost',
   async ({ skip, limit }, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/posts/get-all-data?skip=${skip}&limit=${limit}`);
+      const response = await axios.get(`${URL}/api/posts/get-all-data?skip=${skip}&limit=${limit}`);
       return response.data
 
     } catch (err) {

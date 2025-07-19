@@ -4,12 +4,14 @@ axios.defaults.withCredentials = true;
 import { useNavigate } from "react-router";
 import { createPost } from "../posts/postslice";
 
+const URL='https://redux-gram-server.onrender.com';
+
 export const fetchUser = createAsyncThunk(
   "auth/fetchUser",
   async (_, thunkAPI) => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/user/get-user-data",
+        `${URL}/api/user/get-user-data`,
         {
           withCredentials: true,
         }
