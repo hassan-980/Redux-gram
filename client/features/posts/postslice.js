@@ -9,7 +9,7 @@ export const createPost = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/posts/create-post",
+        `${URL}/api/posts/create-post`,
         data,
         {
           withCredentials: true,

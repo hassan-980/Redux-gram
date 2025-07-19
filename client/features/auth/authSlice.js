@@ -29,7 +29,7 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${URL}/api/auth/login`,
         {
           email,
           password,
@@ -46,7 +46,7 @@ export const verifyEmail = createAsyncThunk(
   async (otp, thunkAPI) => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/verify-email",
+        `${URL}/api/auth/verify-email`,
         {
           otp,
         }
@@ -64,7 +64,7 @@ export const sendEmailVerifyOtp = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/send-verify-otp",
+        `${URL}/api/auth/send-verify-otp`,
         {}, // no body data
         { withCredentials: true } // send cookie
       );
@@ -81,7 +81,7 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async ({ username, email, password }, thunkAPI) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
+      const res = await axios.post(`${URL}/api/auth/register`, {
         username,
         email,
         password,
@@ -96,7 +96,7 @@ export const registerUser = createAsyncThunk(
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     const res = await axios.post(
-      "http://localhost:5000/api/auth/logout",
+      `${URL}/api/auth/logout`,
       {}, // no body data
       { withCredentials: true } // send cookie
     );
@@ -113,7 +113,7 @@ export const sendResetPassOtp = createAsyncThunk(
   async ({email}, thunkAPI) => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/send-reset-otp",
+        `${URL}/api/auth/send-reset-otp`,
         {email}, 
         { withCredentials: true } // send cookie
       );
@@ -133,7 +133,7 @@ export const setNewPass = createAsyncThunk(
   async ({email,otp,newpassword}, thunkAPI) => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/verify-reset-otp",
+        `${URL}/api/auth/verify-reset-otp`,
         {email,otp,newpassword}, 
         { withCredentials: true }
 

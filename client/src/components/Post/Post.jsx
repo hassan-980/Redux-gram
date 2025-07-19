@@ -9,9 +9,11 @@ import { useLocation } from "react-router";
 import { useDispatch } from "react-redux";
 import { getGlobalPosts } from "../../../features/posts/postslice";
 
+
+const URL='https://redux-gram-server.onrender.com';
 const handleDelete = async (postId) => {
   try {
-    await axios.post(`http://localhost:5000/api/posts/delete-post/${postId}`, {
+    await axios.post(`${URL}/posts/delete-post/${postId}`, {
       withCredentials: true,
     });
     alert("post deleted")
