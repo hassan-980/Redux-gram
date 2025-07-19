@@ -1,6 +1,17 @@
 # 📱 MERN Social Media App
 
-A modern full-stack social media application built with the **MERN** stack (MongoDB, Express.js, React.js, Node.js), featuring **user authentication**, **image uploads**, **visibility settings**, **public feeds**, and **Redux Toolkit** state management.
+A modern full-stack social media application built with the **MERN** stack (MongoDB, Express.js, React.js, Node.js), featuring **user authentication(JWT stored in cookies)**, **image uploads**, **visibility settings**, **public feeds**, and **Redux Toolkit** state management.
+
+---
+
+### 🛠️ Tech Stack
+
+| Frontend     | Backend    | Others        |
+| ------------ | ---------- | ------------- |
+| React.js     | Express.js | Redux Toolkit | 
+| Axios        | Node.js    | Multer        |
+| React Router | JWT        | Tailwind CSS  |
+| React Hooks  | MongoDB    | Cookie-parser |
 
 ---
 
@@ -18,7 +29,7 @@ A modern full-stack social media application built with the **MERN** stack (Mong
   - `title`
   - `description`
   - `visibility`: `public` or `private`
-  - `image` (stored in MongoDB as buffer)
+  - `image` (stored in MongoDB as buffer)(image is optional)
 - Lazy loading / "Load More" for performance
 - Image previews with loading indicator
 - Upload validation (file type, size)
@@ -39,7 +50,7 @@ A modern full-stack social media application built with the **MERN** stack (Mong
 - Styled using **Tailwind CSS**
 - Centered loaders and spinners
 - Alerts/toasts for success & error feedback
-- Dark mode support (optional)
+- Dark mode support
 - Responsive for desktop and mobile
 
 ### 🧰 Developer Friendly
@@ -57,17 +68,22 @@ A modern full-stack social media application built with the **MERN** stack (Mong
 
 ---
 
-## 🔜 Upcoming Features (Optional Ideas)
 
-- 🧵 **Post Likes & Comments**
-- 👥 **Follow/Unfollow system**
-- 🔔 **Real-time notifications** via WebSocket
-- 💬 **Chat system** (socket.io)
-- 📷 **Cloudinary** or **S3** image upload
-- 🧠 **AI-generated posts or captions** (OpenAI API)
-- 📊 **Analytics Dashboard** (Admin)
-- 🔍 **Search functionality** for posts/users
-- 🧵 **Trending Tags / Hashtags**
-- 🕵️‍♂️ **Report & block users**
-- 📅 **Schedule posts**
-- 🧑‍💼 **Role-based access control** (Admin/User)
+### 🖼️ Example Post Data
+
+```json
+{
+  "title": "First Post",
+  "description": "This is my first post!",
+  "visibility": "public",
+  "image": "Binary image data"
+}
+```
+
+---
+
+
+
+### 📄 License
+
+This project is open source and free to use. MIT License.
