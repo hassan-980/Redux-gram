@@ -87,7 +87,7 @@ const dispatch = useDispatch();
                       )}
 
                       <img
-                      src={`http://localhost:5000/api/posts/image/${post._id}`}
+                      src={`${URL}/api/posts/image/${post._id}`}
                       alt="Post"
                       className="max-w-full  rounded-lg"
                       onLoad={() => setimageload(false)}
