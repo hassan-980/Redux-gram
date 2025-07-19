@@ -17,7 +17,7 @@ const URL='https://redux-gram-server.onrender.com';
   useEffect(() => {
     setloading(true);
     axios
-      .get(`${URL}/posts/get-user-posts`, {
+      .get(`${URL}/api/posts/get-user-posts`, {
         withCredentials: true,
       })
       .then((res) => {
