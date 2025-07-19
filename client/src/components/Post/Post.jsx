@@ -53,7 +53,7 @@ const dispatch = useDispatch();
               <a className="w-full flex   mr-4">
                 <img
                   className="rounded-full max-w-none w-12 h-12"
-                  src="./public/images/avatar.jpg"
+                  src="../../../avatar.jpg"
                 />
                 <span className=" ml-3 pt-2 text-xl flex font-semibold leading-6 tracking-tighter">
                   {post.username}
