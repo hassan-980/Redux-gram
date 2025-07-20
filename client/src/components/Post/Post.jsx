@@ -48,12 +48,12 @@ const dispatch = useDispatch();
         <div className="   mx-3 sm:mx-5   border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl ">
           <div className="flex flex-col   sm:p-6  p-3">
             <div className="flex">
-              <a className="w-full flex   mr-4">
+              <a className="w-full flex  mb-1 sm:mr-4">
                 <img
-                  className="rounded-full max-w-none w-12 h-12"
+                  className="rounded-full max-w-none sm:w-12 sm:h-12 w-9"
                   src="/avatar.jpg"
                 />
-                <span className=" ml-3 pt-2 text-xl flex font-semibold leading-6 tracking-tighter">
+                <span className=" sm:ml-3 sm:pt-2 pt-1 ml-1.5 text-xl flex font-semibold leading-6 tracking-tighter">
                   {post.username}
                   {post.isVerified ? (
                     <MdVerified className="text-blue-800 text-2xl pl-1 pt-1" />
@@ -71,7 +71,7 @@ const dispatch = useDispatch();
                 </button>
               )}
             </div>
-            <div className="sm:py-4 py-2">
+            <div className="sm:py-4 pt-2">
               <div className="flex justify-center  mb-1">
 
                   {post.image ? (
