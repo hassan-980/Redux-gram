@@ -13,12 +13,10 @@ import { getGlobalPosts } from "../../../features/posts/postslice";
 const URL='https://redux-gram-server.onrender.com';
 const handleDelete = async (postId) => {
   try {
-    await axios.post(`${URL}/posts/delete-post/${postId}`, {
+    await axios.post(`${URL}/api/posts/delete-post/${postId}`, {
       withCredentials: true,
     });
     alert("post deleted")
-    
-
 
     dispatch(getGlobalPosts({ skip: 0, limit }));
   } catch (err) {
@@ -53,7 +51,7 @@ const dispatch = useDispatch();
               <a className="w-full flex   mr-4">
                 <img
                   className="rounded-full max-w-none w-12 h-12"
-                  src="../../../avatar.jpg"
+                  src="/avatar.jpg"
                 />
                 <span className=" ml-3 pt-2 text-xl flex font-semibold leading-6 tracking-tighter">
                   {post.username}

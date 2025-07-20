@@ -21,7 +21,7 @@ function Profile() {
             <div className=" -mt-20 w-full flex justify-center">
               <div className="h-32 w-32">
                 <img
-                  src="../../../avatar.jpg"
+                  src="/avatar.jpg"
                   className="rounded-full object-cover h-full w-full shadow-md"
                 />
               </div>
