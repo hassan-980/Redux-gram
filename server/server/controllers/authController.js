@@ -119,8 +119,10 @@ export const logout = async (req, res) => {
   try {
     res.clearCookie("token", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      // secure: process.env.NODE_ENV === "production",
+      // sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+       secure: true, // Only send over HTTPS
+  sameSite: "None", // "None" required for cross-origin cookies
     });
 
     return res.json({ success: true, message: "Logout successful" });
