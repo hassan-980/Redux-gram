@@ -32,7 +32,7 @@ const URL='https://redux-gram-server.onrender.com';
       {loading ? <Loader></Loader> : null}
       <div className="bg-white dark:bg-black dark:text-white flex  flex-col items-center   sm:justify-center sm:pt-0">
 
-        {(posts.length===0)? (<p className="font-bold" >No posts, create some post </p>) : ( posts.map((post) => (
+        {(posts.length===0)? (<p className="font-bold sm:mt-0  mt-10" >No posts, create some post </p>) : ( posts.map((post) => (
           <Post key={post._id} post={post} />
         )))}
 

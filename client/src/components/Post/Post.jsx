@@ -32,16 +32,6 @@ function Post({ post }) {
 const dispatch = useDispatch();
 
 
-
-
-
-
-
-
-
-
-
-
   return (
     <>
       <div className=" mt-6   dark:bg-black dark:text-white text-black w-full max-w-lg  sm:mt-10  ">
