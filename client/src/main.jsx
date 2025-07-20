@@ -14,50 +14,50 @@ import ResetNewPass from './components/Login/ResetNewPass.jsx'
 
 
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App/>,
-    children: [
-      {
-        path: "",
-        element: <Home />
-      },
-      {
-        path: "profile",
-        element: <Profile />
-      },
-      {
-        path: "login",
-        element: <Login />
-      },{
-        path: "signup",
-        element: <Signup />
-      },{
-        path: "createpost",
-        element: <Createpost />
-      },{
+// const router = createBrowserRouter([
+//   {
+//     path: '/',
+//     element: <App/>,
+//     children: [
+//       {
+//         path: "",
+//         element: <Home />
+//       },
+//       {
+//         path: "profile",
+//         element: <Profile />
+//       },
+//       {
+//         path: "login",
+//         element: <Login />
+//       },{
+//         path: "signup",
+//         element: <Signup />
+//       },{
+//         path: "createpost",
+//         element: <Createpost />
+//       },{
         
-        path: "verify",
-        element: <Verify />
+//         path: "verify",
+//         element: <Verify />
       
-      },{
+//       },{
         
-        path: "Reset-pass",
-        element: <ResetPass />
+//         path: "Reset-pass",
+//         element: <ResetPass />
       
-      }
-      ,{
+//       }
+//       ,{
         
-        path: "Reset-NewPass",
-        element: <ResetNewPass />
+//         path: "Reset-NewPass",
+//         element: <ResetNewPass />
       
-      }
+//       }
     
       
-    ]
-  }
-])
+//     ]
+//   }
+// ])
 
 
 
