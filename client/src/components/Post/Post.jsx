@@ -48,7 +48,7 @@ const dispatch = useDispatch();
         <div className="   mx-3 sm:mx-5   border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl ">
           <div className="flex flex-col   sm:p-6  p-3">
             <div className="flex">
-              <a className="w-full flex  mb-1 sm:mr-4">
+              <a className="w-full flex  mb-2 sm:mb-0 sm:mr-4">
                 <img
                   className="rounded-full max-w-none sm:w-12 sm:h-12 w-9"
                   src="/avatar.jpg"
@@ -110,7 +110,7 @@ const dispatch = useDispatch();
                 <FaComment className="text-2xl ml-1 pt-1 " />
               </div>
 
-              <div className="flex mt-4 dark:text-white   rounded-lg border focus-within:border-sky-200 sm:px-3 px-2 pb-1.5 sm:pt-2.5 pt-1 duration-200 focus-within:ring focus-within:ring-sky-300/30">
+              <div className="flex mt-4 dark:text-white mb-2 sm:mb-0  rounded-lg border focus-within:border-sky-200 sm:px-3 px-2 pb-1.5 sm:pt-2.5 pt-1 duration-200 focus-within:ring focus-within:ring-sky-300/30">
                 <input
                   type="text"
                   name="username"
