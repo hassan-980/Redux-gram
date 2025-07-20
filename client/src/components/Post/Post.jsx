@@ -44,9 +44,9 @@ const dispatch = useDispatch();
 
   return (
     <>
-      <div className=" mt-6 dark:bg-black dark:text-white text-black w-full max-w-lg sm:mt-10 ">
-        <div className="mx-5 border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl ">
-          <div className="flex flex-col   p-6">
+      <div className=" mt-6   dark:bg-black dark:text-white text-black w-full max-w-lg  sm:mt-10  ">
+        <div className="   mx-3 sm:mx-5   border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl ">
+          <div className="flex flex-col   sm:p-6  p-3">
             <div className="flex">
               <a className="w-full flex   mr-4">
                 <img
@@ -71,7 +71,7 @@ const dispatch = useDispatch();
                 </button>
               )}
             </div>
-            <div className="py-4">
+            <div className="sm:py-4 py-2">
               <div className="flex justify-center  mb-1">
 
                   {post.image ? (
@@ -95,7 +95,7 @@ const dispatch = useDispatch();
                   ) : null}
                
               </div>
-              <div className="flex flex-col pt-2">
+              <div className="flex flex-col sm:pt-2 pt-1">
                 <span className="text-xl font-semibold leading-6 tracking-tighter">
                   {post.title}
                 </span>
@@ -103,14 +103,14 @@ const dispatch = useDispatch();
                   {post.description}
                 </p>
               </div>
-              <div className="flex pt-3">
+              <div className="flex sm:pt-3">
                 <span className="text-lg font-bold">{post.likes}</span>
                 <FcLike className="text-2xl ml-1 pt-0.5 " />
                 <span className="text-lg font-bold ml-3">{post.comments}</span>
                 <FaComment className="text-2xl ml-1 pt-1 " />
               </div>
 
-              <div className="flex mt-4 dark:text-white   rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
+              <div className="flex mt-4 dark:text-white   rounded-lg border focus-within:border-sky-200 sm:px-3 px-2 pb-1.5 sm:pt-2.5 pt-1 duration-200 focus-within:ring focus-within:ring-sky-300/30">
                 <input
                   type="text"
                   name="username"
@@ -118,7 +118,7 @@ const dispatch = useDispatch();
                   className=" w-full  placeholder:text-gray-600 border-0 bg-transparent p-0 text-sm  focus:outline-none focus:ring-0 sm:leading-7 text-foreground"
                 />
 
-                <button className="cursor-pointer z-30 text-2xl pb-1">
+                <button className="cursor-pointer z-30 text-2xl sm:pb-1 ">
                   <IoSend />
                 </button>
               </div>
