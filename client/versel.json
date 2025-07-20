@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "src": "/(.*)", "dest": "index.html" }
+    { "src": "/(.*)", "dest": "/src/main.jsx" }
   ]
 }
 
