@@ -7,7 +7,7 @@ import Signup from './components/Signup/Signup.jsx'
 import Createpost from './components/Createpost/Createpost.jsx'
 import Home from './components/Home/Home.jsx'
 import Profile from './components/Profile/Profile.jsx'
-import { BrowserRouter, createBrowserRouter,RouterProvider } from 'react-router'
+import { BrowserRouter, createBrowserRouter,RouterProvider } from 'react-router-dom'
 import Verify from './components/Login/verification.jsx'
 import ResetPass from './components/ResestPass/ResetPass.jsx'
 import ResetNewPass from './components/Login/ResetNewPass.jsx'
@@ -65,7 +65,9 @@ createRoot(document.getElementById('root')).render(
 
     // <RouterProvider router={router} />
 
-    <App/>
+       <BrowserRouter>
+      <App /> {/* App and its children can now use routing hooks/components */}
+    </BrowserRouter>
   
 
 );
