@@ -57,7 +57,7 @@ function Signup() {
           
           ></div>
           <div className="mx-5 border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl ">
-            <div className="flex flex-col p-6">
+            <div className="flex flex-col sm:p-6 p-4">
               <h3 className="text-xl font-semibold leading-6 tracking-tighter">
                 Signup
               </h3>
@@ -66,7 +66,7 @@ function Signup() {
               </p>
                {error && <p className="text-red-500">{error}</p>}
             </div>
-            <div className="p-6 pt-0">
+            <div className="sm:p-6 p-4 pt-0">
               <form onSubmit={handleSubmit}>
                 <div className=" relative rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
                   <div className="flex justify-between">

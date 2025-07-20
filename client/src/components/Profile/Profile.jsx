@@ -16,18 +16,18 @@ function Profile() {
   return (
     <>
       <div className="bg-white dark:bg-black  dark:text-white flex   flex-col items-center  sm:justify-center ">
-        <div className=" mt-25 mb-8 w-full max-w-lg  ">
+        <div className=" mt-25 sm:mb-8 w-full  max-w-lg  ">
           <div className="mx-5 border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl ">
             <div className=" -mt-20 w-full flex justify-center">
               <div className="h-32 w-32">
                 <img
                   src="/avatar.jpg"
-                  className="rounded-full object-cover h-full w-full shadow-md"
+                  className="rounded-full object-cover h-full w-full shadow-2xl"
                 />
               </div>
             </div>
 
-            <div className="flex items-center p-6 mt-5 flex-col ">
+            <div className="flex items-center p-6 sm:mt-5 flex-col ">
               <div className="flex">
                 <h3 className="text-xl mr-2  font-extrabold ">{username}</h3>
 

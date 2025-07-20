@@ -50,14 +50,14 @@ useEffect(() => {
 
         <div
             className="mx-5 border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl ">
-            <div className="flex flex-col p-6">
+            <div className="flex flex-col sm:p-6 p-4">
                 <h3 className="text-xl font-semibold leading-6 tracking-tighter">Login</h3>
                 <p className="mt-1.5 text-sm font-medium text-gray-400
                 ">Welcome back, enter your credentials to continue.
                 </p>
                {error && <p className="text-red-500">{error}</p>}
             </div>
-            <div className="p-6 pt-0">
+            <div className="sm:p-6 p-4 pt-0">
                 <form onSubmit={handleSubmit} >
                     <div>
                         <div>
