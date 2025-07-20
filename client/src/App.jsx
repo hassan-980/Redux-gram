@@ -32,8 +32,8 @@ function App() {
 
     <>
       <Provider store={store}>
-        <Navbar/>
         <BrowserRouter>
+        <Navbar/>
         <Routes>
 
            <Route path="/" element={<Home/>} />

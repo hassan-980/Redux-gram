@@ -65,9 +65,9 @@ createRoot(document.getElementById('root')).render(
 
     // <RouterProvider router={router} />
 
-       <BrowserRouter>
-      <App /> {/* App and its children can now use routing hooks/components */}
-    </BrowserRouter>
+     
+      <App /> 
+    
   
 
 );
