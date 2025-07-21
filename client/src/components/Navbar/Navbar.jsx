@@ -65,7 +65,12 @@ useEffect(() => {
     <>
     {loading ? (<Loader></Loader>) : null }
       <div className=" pb-19  ">
-        <div className=" bg-white dark:bg-black dark:text-white w-full flex  fixed justify-between items-center mx-auto px-8 z-50  h-18 border-b-1 border-gray-600">
+        <div className=" bg-white dark:bg-black dark:text-white w-full flex  fixed justify-between items-center mx-auto sm:px-8 px-2 z-50  h-18 border-b-1 border-gray-600">
+
+          <div>
+            {darkmode? (<img className="sm:w-30 w-26" src="/logoDark.png" alt="" />):( <img className="sm:w-30 w-26" src="/logoLight.png" alt="" />) }
+           
+          </div>
           <div className="hidden sm:block flex-shrink flex-grow-0 justify-start px-2">
             <div className="inline-flex items-center max-w-full">
               <div className="flex items-center flex-grow-0  pl-2  w-60 h-11 border rounded-full px-1  py-1">
