@@ -65,10 +65,10 @@ useEffect(() => {
     <>
     {loading ? (<Loader></Loader>) : null }
       <div className=" pb-19  ">
-        <div className=" bg-white dark:bg-black dark:text-white w-full flex  fixed justify-between items-center mx-auto sm:px-8 px-2 z-50  h-18 border-b-1 border-gray-600">
+        <div className=" bg-white dark:bg-black dark:text-white w-full flex  fixed justify-between items-center mx-auto sm:px-8 px-2 z-50  h-16 sm:h-18 border-b-1 border-gray-600">
 
           <div>
-            {darkmode? (<img className="sm:w-30 w-26" src="/logoDark.png" alt="" />):( <img className="sm:w-30 w-26" src="/logoLight.png" alt="" />) }
+            {darkmode? (<img className="sm:w-30 w-24" src="/logoDark.png" alt="" />):( <img className="sm:w-30 w-24" src="/logoLight.png" alt="" />) }
            
           </div>
           <div className="hidden sm:block flex-shrink flex-grow-0 justify-start px-2">
@@ -110,7 +110,7 @@ useEffect(() => {
                   >
                     <p className="text-sm font-medium px-1">{username}</p>
 
-                    <FaUserCircle className="text-2xl" />
+                    <FaUserCircle className="sm:text-2xl text-sm" />
                   </Link>
                 </div>
               ) : null}

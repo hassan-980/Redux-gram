@@ -51,7 +51,7 @@ const dispatch = useDispatch();
                   ) : null}
                 </span>
 
-                <span className=" text-sm text-gray-500 sm:ml-3 ml-1.5 font-mono">
+                <span className=" text-sm text-gray-500 sm:ml-3 ml-1.5 ">
                   {post.createdAt.slice(0, 16)}
                 </span>
 
