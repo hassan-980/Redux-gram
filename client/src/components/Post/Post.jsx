@@ -28,7 +28,6 @@ function Post({ post }) {
   const { loggedIn } = useSelector((state) => state.auth);
   const location = useLocation();
   const [imageload, setimageload] = useState(true);
-  console.log(post)
 const dispatch = useDispatch();
 
 

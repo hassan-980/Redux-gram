@@ -17,7 +17,7 @@ import { fetchUser } from "../../../features/auth/authSlice";
 import Loader from "../Loader";
 import { useNavigate } from "react-router";
 import { getGlobalPosts } from "../../../features/posts/postslice";
-
+import LoginPopup from "../Login/loginPopup";
 
 function Navbar() {
   const [darkmode, setdarkmode] = useState("");
@@ -63,7 +63,11 @@ useEffect(() => {
 
   return (
     <>
+    
     {loading ? (<Loader></Loader>) : null }
+
+     {loggedIn ?  null :(          <LoginPopup/>)}
+
       <div className=" pb-19  ">
         <div className=" bg-white dark:bg-black dark:text-white w-full flex  fixed justify-between items-center mx-auto sm:px-8 px-2 z-50  h-16 sm:h-18 border-b-1 border-gray-600">
 
