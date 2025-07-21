@@ -78,7 +78,6 @@ const dispatch = useDispatch();
                           <div className="h-70 flex  items-center">
                           <div className="w-7   mt-4 h-7 border-3 mr-1 border-t-transparent dark:border-white border-black rounded-full animate-spin"></div>
                           </div>
-                       
                       )}
 
                       <img
