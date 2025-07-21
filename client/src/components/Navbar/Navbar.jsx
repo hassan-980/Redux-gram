@@ -68,7 +68,11 @@ useEffect(() => {
         <div className=" bg-white dark:bg-black dark:text-white w-full flex  fixed justify-between items-center mx-auto sm:px-8 px-2 z-50  h-16 sm:h-18 border-b-1 border-gray-600">
 
           <div>
-            {darkmode? (<img className="sm:w-30 w-24" src="/logoDark.png" alt="" />):( <img className="sm:w-30 w-24" src="/logoLight.png" alt="" />) }
+            <Link to="/" >
+
+             {darkmode? (<img className="sm:w-30 w-24" src="/logoDark.png" alt="" />):( <img className="sm:w-30 w-24" src="/logoLight.png" alt="" />) }
+            </Link>
+           
            
           </div>
           <div className="hidden sm:block flex-shrink flex-grow-0 justify-start px-2">
