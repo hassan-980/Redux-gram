@@ -114,8 +114,8 @@ const dispatch = useDispatch();
                   className=" w-full  placeholder:text-gray-600 border-0 bg-transparent p-0 text-sm  focus:outline-none focus:ring-0 sm:leading-7 text-foreground"
                 />
 
-                <button className="cursor-pointer z-30 text-2xl sm:pb-1 ">
-                  <IoSend />
+                <button className="cursor-pointer z-10 text-2xl  sm:pb-1 ">
+                  <IoSend  />
                 </button>
               </div>
             </div>
