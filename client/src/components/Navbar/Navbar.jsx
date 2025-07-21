@@ -17,7 +17,7 @@ import { fetchUser } from "../../../features/auth/authSlice";
 import Loader from "../Loader";
 import { useNavigate } from "react-router";
 import { getGlobalPosts } from "../../../features/posts/postslice";
-import LoginPopup from "../Login/loginPopup";
+import LoginPopup from "../Login/loginPopup.jsx";
 
 function Navbar() {
   const [darkmode, setdarkmode] = useState("");
