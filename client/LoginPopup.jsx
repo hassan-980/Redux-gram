@@ -30,6 +30,7 @@ function LoginPopup() {
                 <Link
                   className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 mt-3"
                   to="/login"
+                  onClick={()=>setIsActive(true)}
                 >
                   Login
                 </Link>
@@ -37,6 +38,7 @@ function LoginPopup() {
                 <Link
                   className="flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex mt-3"
                   to="/signup"
+                  onClick={()=>setIsActive(true)}
                 >
                   Sign in
                 </Link>
