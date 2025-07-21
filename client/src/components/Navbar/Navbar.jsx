@@ -86,7 +86,7 @@ useEffect(() => {
             </div>
           </div>
 
-          <div className="flex justify-end items-center ">
+          <div className="flex  items-center ">
             <div className=" w-2 flex text-2xl ">
               <button
                 className="hover:text-3xl flex items-center cursor-pointer"
