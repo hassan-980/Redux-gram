@@ -14,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 connectDB();
 
-const allowedOrigins = ["http://localhost:5173","https://redux-gram.vercel.app"];
+const allowedOrigins = ["http://localhost:5173","https://reduxgram.vercel.app"];
 
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(cookieParser({ Credentials: true }));
