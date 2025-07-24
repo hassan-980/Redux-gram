@@ -4,7 +4,11 @@ axios.defaults.withCredentials = true;
 import { useNavigate } from "react-router";
 import { createPost } from "../posts/postslice";
 
-const URL='https://redux-gram-server.onrender.com';
+// const URL='https://redux-gram-server.onrender.com';
+
+const URL = import.meta.env.VITE_SERVER_URL;
+
+
 
 export const fetchUser = createAsyncThunk(
   "auth/fetchUser",
@@ -97,8 +101,8 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     const res = await axios.post(
       `${URL}/api/auth/logout`,
-      {}, // no body data
-      { withCredentials: true } // send cookie
+      {},
+      { withCredentials: true } 
     );
     return res.data;
   } catch (err) {
@@ -115,7 +119,7 @@ export const sendResetPassOtp = createAsyncThunk(
       const res = await axios.post(
         `${URL}/api/auth/send-reset-otp`,
         {email}, 
-        { withCredentials: true } // send cookie
+        { withCredentials: true } 
       );
       return res.data;
     } catch (err) {
@@ -169,6 +173,8 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+
+      //LOGIN
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -182,7 +188,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      //
+      // REGISTER USER
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -222,7 +228,7 @@ const authSlice = createSlice({
         state.user = null;
         state.error = action.payload;
       })
-            // FETCH DATA
+      // FETCH USER DATA
       .addCase(fetchUser.pending, (state) => {
         state.loading = true;
       })
@@ -237,7 +243,7 @@ const authSlice = createSlice({
         state.user = null;
       })
 
-      // CREATE POST
+     
       
       // SEND OTP FOR RESET PASS
             .addCase(sendResetPassOtp.pending, (state) => {
@@ -266,9 +272,6 @@ const authSlice = createSlice({
       .addCase(setNewPass.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-
-    
-          
       });
       
 

@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //API ENDPOINTS
 app.get("/", (req, res) => {
-  res.send("Welcome to the Social Server!");
+  res.send("Welcome to the Reduxgram!!");
 });
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
@@ -33,3 +33,4 @@ app.use("/api/posts", postRoutes);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+

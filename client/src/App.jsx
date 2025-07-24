@@ -14,6 +14,7 @@ import Profile from './components/Profile/Profile.jsx'
 import Verify from './components/Login/verification.jsx'
 import ResetPass from './components/ResestPass/ResetPass.jsx'
 import ResetNewPass from './components/Login/ResetNewPass.jsx'
+import ChatHome from "./components/Messages/ChatHome.jsx";
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="verify" element={<Verify />} />
           <Route path="Reset-pass" element={<ResetPass />} />
           <Route path="Reset-NewPass" element={<ResetNewPass />} />
+          <Route path="chat" element={<ChatHome />} />
 
 
         </Routes>

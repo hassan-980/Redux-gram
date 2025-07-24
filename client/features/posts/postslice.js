@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const URL='https://redux-gram-server.onrender.com';
+// const URL='https://redux-gram-server.onrender.com';
+
+const URL = import.meta.env.VITE_SERVER_URL;
 
 export const createPost = createAsyncThunk(
   "post/createPost",
@@ -21,8 +23,6 @@ export const createPost = createAsyncThunk(
     }
   }
 );
-
-
 
 
 

@@ -18,6 +18,7 @@ import Loader from "../Loader";
 import { useNavigate } from "react-router";
 import { getGlobalPosts } from "../../../features/posts/postslice";
 import LoginPopup from "../../../LoginPopup";
+import { AiOutlineMessage } from "react-icons/ai";
 
 function Navbar() {
   const [darkmode, setdarkmode] = useState("");
@@ -182,6 +183,12 @@ useEffect(() => {
               to="/createpost"
             >
               <MdOutlineAddBox />
+            </Link>
+            <Link
+              className=" px-2 py-1 text-2xl hover:text-3xl  "
+              to="/chat"
+            >
+              <AiOutlineMessage />
             </Link>
 
             <div className="mr-8 flex justify-center w-3">
