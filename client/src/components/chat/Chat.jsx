@@ -1,5 +1,5 @@
 
-import ChatSidebar from "./chatSideBar";
+import ChatSidebar from "./ChatSideBar";
 import ChatWindow from "./ChatWindow";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
