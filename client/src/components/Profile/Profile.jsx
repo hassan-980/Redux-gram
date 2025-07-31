@@ -7,6 +7,7 @@ import { MdOutlineFileUpload } from "react-icons/md";
 import { ImCross } from "react-icons/im";
 import { useEffect, useState } from "react";
 import { TiUpload } from "react-icons/ti";
+import { FaPlusCircle } from "react-icons/fa";
 
 import axios from "axios";
 function Profile() {
@@ -138,26 +139,42 @@ function Profile() {
         </div>
       </div>
 
+
+
+      
+
       <div className="bg-white dark:bg-black  dark:text-white flex   flex-col items-center  sm:justify-center ">
         <div className=" mt-25 sm:mb-8 w-full  max-w-lg  ">
-          <div className="mx-5 border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl ">
+          <div className="mx-3 border border-black/80  rounded-lg dark:border-white/50   lg:rounded-xl ">
             <div className=" -mt-20 w-full flex justify-center">
               <div className="h-32 w-32">
-                <div className="flex items-center  flex-col">
-                  <img
+                <div className="relative">
+                  {authuser && (
+  <img
+    src={`${import.meta.env.VITE_SERVER_URL}/api/user/get-profile-pic/${authuser.id}` || "/avatar.jpg"}
+    alt="Profile"
+    className=" rounded-full object-cover  shadow-2xl"
+  />
+)}
+                  {/* <img
                     src={authuser}
                     onError={(e) => {
                       e.target.onerror = null; // prevent infinite loop
                       e.target.src = "/avatar.jpg"; // path to your public avatar image
                     }}
                     className="rounded-full object-cover h-full w-full shadow-2xl"
-                  />
+                  /> */}
 
 
 
 
                   <button className="flex" onClick={() => setIsUpdate(false)}>
-                    <TiUpload className=" text-2xl -mt-2 " />
+                    <div className="absolute bottom-0 right-2 cursor-pointer  ">
+                       <FaPlusCircle className="text-2xl " />
+
+                    </div>
+                   
+
                     
                   </button>
                 </div>

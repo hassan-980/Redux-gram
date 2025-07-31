@@ -39,7 +39,7 @@ function Post({ post }) {
     <>
       {loading ? <Loader></Loader> : null}
       <div className=" mt-6   dark:bg-black dark:text-white text-black w-full max-w-lg  sm:mt-10  ">
-        <div className="   mx-3 sm:mx-5   border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl ">
+        <div className="   mx-3 sm:mx-5   border  border-black/80  rounded-lg dark:border-white/50  lg:rounded-xl ">
           <div className="flex flex-col   sm:p-6  p-3">
             <div className="flex">
               <div className="w-full flex sm:mt-0 mt-2 mb-2 sm:mb-0 sm:mr-4">

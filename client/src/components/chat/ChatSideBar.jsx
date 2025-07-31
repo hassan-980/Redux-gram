@@ -32,7 +32,7 @@ const ChatSidebar = () => {
   };
 
   return (
-    <>
+    <> 
       {/* {loading ? <Loader></Loader> : null} */}
       <div className="w-1/2 bg-gray-100 dark:bg-black p-2 sm:p-4 dark:border  dark:border-r-white/50  ">
         <h2 className="text-xl dark:text-white font-bold  mb-4">Chats</h2>
