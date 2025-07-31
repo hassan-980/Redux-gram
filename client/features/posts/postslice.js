@@ -10,13 +10,9 @@ export const createPost = createAsyncThunk(
   "post/createPost",
   async (data, thunkAPI) => {
     try {
-      const res = await axios.post(
-        `${URL}/api/posts/create-post`,
-        data,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${URL}/api/posts/create-post`, data, {
+        withCredentials: true,
+      });
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.message);
@@ -24,22 +20,35 @@ export const createPost = createAsyncThunk(
   }
 );
 
-
-
 export const getGlobalPosts = createAsyncThunk(
-  'post/getGlobalPost',
+  "post/getGlobalPost",
   async ({ skip, limit }, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${URL}/api/posts/get-all-data?skip=${skip}&limit=${limit}`);
-      return response.data
-
+      const response = await axios.get(
+        `${URL}/api/posts/get-all-data?skip=${skip}&limit=${limit}`
+      );
+      return response.data;
     } catch (err) {
-      return rejectWithValue(err.response?.data?.message || 'Error loading posts');
+      return rejectWithValue(
+        err.response?.data?.message || "Error loading posts"
+      );
     }
   }
 );
 
-
+export const getUserPosts = createAsyncThunk(
+  "get/getUserPosts",
+  async (thunkAPI) => {
+    try {
+      const res = await axios.get(`${URL}/api/posts/get-user-posts`, {
+        withCredentials: true,
+      });
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data.message);
+    }
+  }
+);
 
 export const postSlice = createSlice({
   name: "post",
@@ -51,6 +60,7 @@ export const postSlice = createSlice({
     loading: false,
     error: null,
     success: null,
+    userposts: [],
   },
 
   reducers: {},
@@ -70,24 +80,36 @@ export const postSlice = createSlice({
         state.error = action.payload;
       })
 
-      //create post
+      //CREATE POST
       .addCase(createPost.pending, (state) => {
-              state.loading = true;
-              state.error = null;
-            })
-            .addCase(createPost.fulfilled, (state, action) => {
-              state.loading = false;
-              state.error = action.payload.message;
-              
-            })
-            .addCase(createPost.rejected, (state, action) => {
-              state.loading = false;
-              state.error = action.payload;
-            })
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createPost.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+        state.posts = [{ ...action.payload.post }, ...state.posts];
+        state.userposts = [{ ...action.payload.post }, ...state.userposts];
+      })
+      .addCase(createPost.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      //GET USER POSTS
+      .addCase(getUserPosts.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getUserPosts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userposts = action.payload;
+      })
+      .addCase(getUserPosts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
-
-
 
 export const {} = postSlice.actions;
 export default postSlice.reducer;

@@ -7,6 +7,8 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   verifyOtp: { type: String, default: '' },
+  profilePic: { data: Buffer,
+    contentType: String, },
   verifyOtpExpires: { type: Number, default: 0 },
   isVerified: { type: Boolean, default: false },
   resetOtp: { type: String, default: '' },

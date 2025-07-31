@@ -3,6 +3,7 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 import { useNavigate } from "react-router";
 import { createPost } from "../posts/postslice";
+import socket from "../../utils/socket";
 
 // const URL='https://redux-gram-server.onrender.com';
 
@@ -20,7 +21,6 @@ export const fetchUser = createAsyncThunk(
           withCredentials: true,
         }
       );
-
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue("Session expired");
@@ -39,6 +39,7 @@ export const loginUser = createAsyncThunk(
           password,
         }
       );
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
@@ -167,8 +168,8 @@ const authSlice = createSlice({
     loading: false,
     error: null,
     isverified: null,
-    success:null
-   
+    success:null,
+    authuser:null
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -237,6 +238,8 @@ const authSlice = createSlice({
         state.loggedIn = true;
         state.username = action.payload.userData.username;
         state.isverified = action.payload.userData.isVerified;
+        state.authuser = action.payload.userData;
+        socket.emit("addUser", state.authuser.id);
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.loading = false;

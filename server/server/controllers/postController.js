@@ -1,8 +1,8 @@
 //postController.js
-import postModel from "../config/modals/postModel.js";
-import Post from "../config/modals/postModel.js";
+import postModel from "../config/models/postModel.js";
+import Post from "../config/models/postModel.js";
 
-import userModel from "../config/modals/userModel.js";
+import userModel from "../config/models/userModel.js";
 
 export const createPost = async (req, res) => {
   try {
@@ -20,7 +20,7 @@ if (!title || !description ) {
   }
 
     const userId  = req.userId;
-    console.log(userId)
+
 
     const user = await userModel.findById(userId)
 

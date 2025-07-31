@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import userModel from "../config/modals/userModel.js";
+import userModel from "../config/models/userModel.js";
 import transporter from "../config/nodemailer.js";
 
 
@@ -98,7 +98,7 @@ export const login = async (req, res) => {
       expiresIn: "7d",
     });
 
-    res
+    return res
       .cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
@@ -107,9 +107,9 @@ export const login = async (req, res) => {
   // sameSite: "None", // "None" required for cross-origin cookies
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
-      .json({ email: user.email, username: user.username });
+      .json({ success: true, message: "Login successful", email: user.email, username: user.username });
 
-    return res.json({ success: true, message: "Login successful" });
+
   } catch (error) {
     res.json({ success: false, message: error.message });
   }

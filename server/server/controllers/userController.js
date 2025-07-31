@@ -1,6 +1,8 @@
-import userModel from "../config/modals/userModel.js";
+import userModel from "../config/models/userModel.js";
 
-
+import cloudinary from "../../lib/cloudinary.js";
+import Message from "../config/models/messageModel.js";
+// import uploadmulter from "../middleware/multer.js";
 
 export const getUserData = async (req, res) => {
   try {
@@ -16,6 +18,8 @@ export const getUserData = async (req, res) => {
         username: user.username,
         isVerified: user.isVerified,
         email: user.email,
+        id: user._id,
+        profilePic: user.profilePic,
       },
     });
   } catch (error) {
@@ -42,3 +46,78 @@ export const deleteUser = async (req, res) => {
 
 
 
+
+
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const loggedInserId = req.userId;
+    const users = await userModel.find({ _id: { $ne: loggedInserId }}, '_id username profilePic isVerified ');
+
+    //count number of messages not seen
+    const unseenMessages = {};
+    const promises = users.map(async (user) => {
+      const messages = await Message.find({
+        senderId: user._id,
+        receiverId: loggedInserId,
+        seen: false,
+      });
+      if(messages.length >0){
+        unseenMessages[user._id] = messages.length;
+      }
+      
+    })
+
+    await Promise.all(promises)
+    
+    res.json({
+      success: true,
+      users , unseenMessages
+    });
+  } catch (error) {
+    console.log(error.message)
+    res.json({ success: false, message: error.message });
+  }
+};
+
+
+
+
+
+export const updateProfilePic = async (req,res)=>{
+    try {
+   
+       const userId  = req.userId;
+
+       if (!req.file) {
+            return res.status(400).json({ message: 'No image file provided' });
+       }
+
+       const image = {
+           data: req.file.buffer,
+           contentType: req.file.mimetype,
+         };
+
+       await userModel.findByIdAndUpdate(userId , {  profilePic: image }, { new: true });
+   
+       
+       res.json({ success: true, message: 'Profile pic updated successfully',image });
+     } catch (err) {
+       console.error(err);
+       res.json({ success: false, message: 'Server error', error: err.message });
+     }
+
+}
+
+export const getProfilePic =async (req, res) => {
+  try {
+    const user = await userModel.findById(req.params.id);
+    if (!user || !user.profilePic || !user.profilePic || !user.profilePic.data) return res.status(404).send('No image');
+
+    res.set('Content-Type', user.profilePic.contentType);
+    res.send(user.profilePic.data);
+  } catch (err) {
+    res.status(500).send('Error loading image');
+  }
+}
+  

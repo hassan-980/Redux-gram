@@ -34,14 +34,6 @@ useEffect(() => {
 
 
 
-
-
-
-
-
-
-
-
   return (
     <>{loading ? (<Loader></Loader>) : null }
 <div className="bg-white dark:bg-black dark:text-white flex min-h-screen flex-col items-center  sm:justify-center sm:pt-0">
@@ -131,55 +123,3 @@ export default Login;
 
 
 
-// import { useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { loginUser } from '../../../features/auth/authSlice';
-// import { useNavigate } from 'react-router';
-
-// const Login = () => {
-//   const dispatch = useDispatch();
-//   const { loading, error, user } = useSelector((state) => state.auth);
-
-//   const [formData, setFormData] = useState({ email: '', password: '' });
-
-//   const handleChange = (e) =>
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     dispatch(loginUser(formData));
-//   };
-
-//   return (
-//     <div className="max-w-sm mx-auto mt-20">
-//       <h2 className="text-2xl font-bold mb-4">Login</h2>
-//       {user && <p className="text-green-500">Logged in as {user.email}</p>}
-//       <form onSubmit={handleSubmit} className="space-y-4">
-//         <input
-//           type="email"
-//           name="email"
-//           placeholder="Email"
-//           onChange={handleChange}
-//           className="w-full p-2 border rounded"
-//         />
-//         <input
-//           type="password"
-//           name="password"
-//           placeholder="Password"
-//           onChange={handleChange}
-//           className="w-full p-2 border rounded"
-//         />
-//         <button
-//           type="submit"
-//           disabled={loading}
-//           className="w-full bg-blue-600 text-white py-2 rounded"
-//         >
-//           {loading ? 'Logging in...' : 'Login'}
-//         </button>
-//         {error && <p className="text-red-500">{error}</p>}
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Login;

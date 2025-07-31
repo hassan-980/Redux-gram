@@ -1,61 +1,73 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FcLike } from "react-icons/fc";
 import { IoSend } from "react-icons/io5";
 import { MdVerified } from "react-icons/md";
 import { FaComment } from "react-icons/fa";
-import { useSelector } from "react-redux";
 import axios from "axios";
 import { useLocation } from "react-router";
-import { useDispatch } from "react-redux";
-import { getGlobalPosts } from "../../../features/posts/postslice";
+import Loader from "../Loader";
 
-
-const URL='https://redux-gram-server.onrender.com';
-const handleDelete = async (postId) => {
-  try {
-    await axios.post(`${URL}/api/posts/delete-post/${postId}`, {
-      withCredentials: true,
-    });
-    alert("post deleted")
-
-    dispatch(getGlobalPosts({ skip: 0, limit }));
-  } catch (err) {
-    console.error("Delete failed:", err);
-  }
-};
+const URL = import.meta.env.VITE_SERVER_URL;
 
 function Post({ post }) {
-  const { loggedIn } = useSelector((state) => state.auth);
   const location = useLocation();
   const [imageload, setimageload] = useState(true);
-const dispatch = useDispatch();
+  const [loading, setloading] = useState(false);
+
+  const handleDelete = async (postId) => {
+    setloading(true);
+    try {
+      await axios
+        .post(`${URL}/api/posts/delete-post/${postId}`, {
+          withCredentials: true,
+        })
+        .then(async () => {
+          setloading(false);
+        });
+      alert("Post deleted");
+    } catch (err) {
+      console.error("Delete failed:", err);
+    }
+  };
+
+
+
+
 
 
   return (
     <>
+      {loading ? <Loader></Loader> : null}
       <div className=" mt-6   dark:bg-black dark:text-white text-black w-full max-w-lg  sm:mt-10  ">
         <div className="   mx-3 sm:mx-5   border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl ">
           <div className="flex flex-col   sm:p-6  p-3">
             <div className="flex">
               <div className="w-full flex sm:mt-0 mt-2 mb-2 sm:mb-0 sm:mr-4">
                 <img
-                  className="rounded-full max-w-none sm:w-12 sm:h-12 w-10 h-10"
-                  src="/avatar.jpg"
+                  className="rounded-full max-w-none sm:w-12 sm:h-12 w-10 h-10 object-cover"
+                  src={
+
+                    `${URL}/api/user/get-profile-pic/${post.userId}`
+
+                  }
+
+                  onError={(e) => {
+    e.target.onerror = null; // prevent infinite loop
+    e.target.src = "/avatar.jpg"; // path to your public avatar image
+  }}
                 />
                 <div className=" flex flex-col">
                   <span className=" sm:ml-3 sm:pt-1 pt-0 ml-1.5 text-xl flex font-semibold leading-6 tracking-tighter">
-                  {post.username}
-                  {post.isVerified ? (
-                    <MdVerified className="text-blue-800 text-2xl pl-1 pt-1" />
-                  ) : null}
-                </span>
+                    {post.username}
+                    {post.isVerified ? (
+                      <MdVerified className="text-blue-800 text-2xl pl-1 pt-1" />
+                    ) : null}
+                  </span>
 
-                <span className=" text-sm text-gray-500 sm:ml-3 ml-1.5 ">
-                  {post.createdAt.slice(0, 16)}
-                </span>
-
+                  <span className=" text-sm text-gray-500 sm:ml-3 ml-1.5 ">
+                    {post.createdAt.slice(0, 16)}
+                  </span>
                 </div>
-                
               </div>
 
               {location.pathname === "/profile" && (
@@ -70,26 +82,23 @@ const dispatch = useDispatch();
             </div>
             <div className="sm:py-4 pt-2">
               <div className="flex justify-center  mb-1">
+                {post.image ? (
+                  <div>
+                    {imageload && (
+                      <div className="h-70 flex  items-center">
+                        <div className="w-7   mt-4 h-7 border-3 mr-1 border-t-transparent dark:border-white border-black rounded-full animate-spin"></div>
+                      </div>
+                    )}
 
-                  {post.image ? (
-                    <div>
-                      {imageload && (
-                        
-                          <div className="h-70 flex  items-center">
-                          <div className="w-7   mt-4 h-7 border-3 mr-1 border-t-transparent dark:border-white border-black rounded-full animate-spin"></div>
-                          </div>
-                      )}
-
-                      <img
+                    <img
                       src={`${URL}/api/posts/image/${post._id}`}
                       alt="Post"
                       className="max-w-full  rounded-lg"
                       onLoad={() => setimageload(false)}
-            onError={() => setimageload(false)}
+                      onError={() => setimageload(false)}
                     />
-                    </div>
-                  ) : null}
-               
+                  </div>
+                ) : null}
               </div>
               <div className="flex flex-col sm:pt-2 pt-1">
                 <span className="text-xl font-semibold leading-6 tracking-tighter">
@@ -115,7 +124,7 @@ const dispatch = useDispatch();
                 />
 
                 <button className="cursor-pointer z-10 text-2xl  sm:pb-1 ">
-                  <IoSend  />
+                  <IoSend />
                 </button>
               </div>
             </div>

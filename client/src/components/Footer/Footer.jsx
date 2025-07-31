@@ -1,11 +1,13 @@
 import React from 'react'
 import { FaFacebook,FaGithub,FaTwitter,FaInstagram,FaLinkedin  } from "react-icons/fa";
 
+
 function Footer() {
   return (
+
     <>
 
-    <div className="text-center">
+    <div className={`  text-center`}>
 
 
     <span className="block m-10 text-sm text-center text-gray-500">© 2025™. All Rights Reserved.

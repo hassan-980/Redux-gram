@@ -4,8 +4,6 @@ import jwt from 'jsonwebtoken';
 
 const userAuth = async (req, res, next) => {
     const token = req.cookies.token;
-    console.log(token)
-    
     
 
     if (!token) {
@@ -16,8 +14,7 @@ const userAuth = async (req, res, next) => {
 
     try {
         const tokenDecoded = jwt.verify(token, process.env.JWT_SECRET);
-        console.log(tokenDecoded.id);
-
+       
         if (tokenDecoded && tokenDecoded.id) {
             req.userId = tokenDecoded.id;
         } else {
