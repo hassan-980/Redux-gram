@@ -24,7 +24,7 @@ const server = http.createServer(app);
 // Initialize Socket.io
 export const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
+    origin: "*",
     credentials: true,
   },
 });
