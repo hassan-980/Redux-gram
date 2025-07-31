@@ -50,7 +50,7 @@ const ChatSidebar = () => {
             </form> */}
 
         <div className="overflow-auto flex flex-col">
-          <div className=" w-full h-[340px]   overflow-y-auto ">
+          <div className=" w-full    overflow-y-auto ">
             {otherUsers?.map((chat) => (
               <button
                 key={chat._id}
@@ -65,7 +65,7 @@ const ChatSidebar = () => {
                       className="rounded-full w-8 h-8 items-start sm:mx-3 mx-2  "
                       src={`${
                         import.meta.env.VITE_SERVER_URL
-                      }/api/user/get-profile-pic/${chat._id}`}
+                      }/api/user/get-profile-pic/${chat._id}` || "/avatar.jpg"}
                       onError={(e) => {
                         e.target.onerror = null; // prevent infinite loop
                         e.target.src = "/avatar.jpg"; // path to your public avatar image

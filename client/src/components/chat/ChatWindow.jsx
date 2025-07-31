@@ -6,7 +6,10 @@ import { TiTick } from "react-icons/ti";
 import fetchMessages from "../../../hooks/fetchMessages";
 import { useRef } from "react";
 
-import { setNewMessage, updateSeen } from "../../../features/messages/messageSlice";
+import {
+  setNewMessage,
+  updateSeen,
+} from "../../../features/messages/messageSlice";
 import axios from "axios";
 const ChatWindow = () => {
   const { selectedUser, onlineUsers } = useSelector((store) => store.user);
@@ -18,30 +21,26 @@ const ChatWindow = () => {
   fetchMessages();
 
   socket.on("getSeenId", (id) => {
-      dispatch(updateSeen(id.id.id));
-    });
+    dispatch(updateSeen(id.id.id));
+  });
 
   async function markMessageAsSeen() {
-      try {
-        const res = await axios.post(
-          `${import.meta.env.VITE_SERVER_URL}/api/message/mark-seen/${
-            selectedUser._id
-          }`
-        )
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/api/message/mark-seen/${
+          selectedUser._id
+        }`
+      );
 
       let id = res.data.users[0]._id;
 
-      if(!id){
-        return
+      if (!id) {
+        return;
       }
-        socket.emit("seenMessage", { id  });
-        //  dispatch(updateSeen(res.data));
-        
-       
-      } catch (error) {
-        
-      }
-    }
+      socket.emit("seenMessage", { id });
+      //  dispatch(updateSeen(res.data));
+    } catch (error) {}
+  }
 
   useEffect(() => {
     if (selectedUser === null) {
@@ -51,11 +50,7 @@ const ChatWindow = () => {
     socket.on("getMessage", (data) => {
       dispatch(setNewMessage(data.msg));
       markMessageAsSeen();
-          
-      
     });
-
-
 
     return () => {
       socket.off("getUsers");
@@ -68,10 +63,9 @@ const ChatWindow = () => {
     if (selectedUser === null) {
       return;
     }
-    
 
     markMessageAsSeen();
-  }, [selectedUser,setNewMessage]);
+  }, [selectedUser, setNewMessage]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -81,23 +75,22 @@ const ChatWindow = () => {
     <>
       {selectedUser === null ? (
         <div className=" w-full   flex justify-center items-center">
-          <h1 className=" font-extrabold text-xl">let's start a chat</h1>
+          <h1 className=" font-extrabold dark:text-white text-xl">
+            let's start a chat
+          </h1>
         </div>
       ) : (
-        <div className=" w-full  lg:col-span-2 lg:block ">
+        <div className=" w-full lg:col-span-2 lg:block ">
           <div className="relative flex items-center p-3 border-b border-gray-300">
             <img
               className="object-cover w-10 h-10 rounded-full"
-              src={
-
-                    `${import.meta.env.VITE_SERVER_URL}/api/user/get-profile-pic/${selectedUser._id}`
-
-                  }
-
-                  onError={(e) => {
-    e.target.onerror = null; // prevent infinite loop
-    e.target.src = "/avatar.jpg"; // path to your public avatar image
-  }}
+              src={`${
+                import.meta.env.VITE_SERVER_URL
+              }/api/user/get-profile-pic/${selectedUser._id}`}
+              onError={(e) => {
+                e.target.onerror = null; // prevent infinite loop
+                e.target.src = "/avatar.jpg"; // path to your public avatar image
+              }}
               alt="username"
             />
             <span className="block ml-2 mb-2 font-bold text-gray-600 dark:text-white">
@@ -117,7 +110,9 @@ const ChatWindow = () => {
               </span>
             )}
           </div>
-          <div className="  relative w-full h-[335px] sm:p-6 p-2  overflow-y-auto hide-scrollbar">
+
+         
+          <div className="  relative w-full sm:h-[55vh] h-[57vh]  sm:p-6 p-2  overflow-y-auto hide-scrollbar">
             <ul className="space-y-2">
               {messages?.map((data) => (
                 // console.log(data),
@@ -159,10 +154,12 @@ const ChatWindow = () => {
                 </li>
               ))}
             </ul>
+             
           </div>
 
-          <MessageInput />
+         <MessageInput />
         </div>
+        
       )}
     </>
   );

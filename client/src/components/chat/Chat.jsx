@@ -11,7 +11,7 @@ const Chat = () => {
 
 
   return (
-    <div className="flex h-[464px] -mt-2 sm:mt-0">
+    <div className="flex  h-[calc(100vh-140px)] -mt-2 sm:mt-0">
       <ChatSidebar />
       <ChatWindow />
     </div>
