@@ -22,6 +22,8 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { getUserPosts } from "../../../features/posts/postslice";
 import socket from "../../../utils/socket";
 import { setOnlineUsers } from "../../../features/users/userSlice";
+import { setOtherUsers } from "../../../features/users/userSlice";
+import axios from "axios";
 
 function Navbar() {
   const [darkmode, setdarkmode] = useState("");
@@ -73,6 +75,20 @@ function Navbar() {
     
   }, [dispatch]);
 
+    useEffect(() => {
+      // setloading(true);
+      axios
+        .get(`${import.meta.env.VITE_SERVER_URL}/api/user/get-all-users`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          // setChats(res.data.users);
+          dispatch(setOtherUsers(res.data.users));
+        })
+
+        .catch((err) => console.error(err));
+    }, []);
+
   useEffect(() => {
     dispatch(getGlobalPosts({ skip: 0, limit }));
   }, [dispatch]);
@@ -82,6 +98,8 @@ function Navbar() {
       dispatch(setOnlineUsers(users));
     });
   }, []);
+
+
 
   return (
     <>

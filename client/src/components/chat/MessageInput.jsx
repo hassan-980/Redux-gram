@@ -31,18 +31,8 @@ const MessageInput = () => {
       );
 
       const msg = res?.data?.newMessage;
-
-    socket.emit("sendMessage", msg);
-
-
-
-
-
-
-      // socket.emit("sendMessage", res?.data?.newMessage);
-      // dispatch(setMessages([...messages, res?.data?.newMessage]));
       dispatch(setNewMessage(res?.data?.newMessage));
-
+    socket.emit("sendMessage", msg);
 
     } catch (error) {
       console.log(error);
