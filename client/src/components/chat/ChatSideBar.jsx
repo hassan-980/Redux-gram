@@ -74,7 +74,7 @@ const ChatSidebar = () => {
                       alt="image"
                     />
                     {onlineUsers.includes(chat._id) ? (
-                      <span className="absolute w-2 h-2 bg-green-600 rounded-full left-9 bottom-0"></span>
+                      <span className="absolute w-2 h-2 bg-green-600 rounded-full sm:left-9 left-8 bottom-0"></span>
                     ) : null}
                     {/* <span className="absolute w-2 h-2  bg-green-600 rounded-full left-9 bottom-0 "></span> */}
                   </div>
