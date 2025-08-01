@@ -1,8 +1,7 @@
-import React from "react";
 import Post from "../Post/Post";
 import { useSelector, useDispatch } from "react-redux";
 import { getGlobalPosts } from "../../../features/posts/postslice";
-import { useEffect, useState } from "react";
+import Footer from "../Footer/Footer";
 
 function Home() {
   const dispatch = useDispatch();
@@ -12,19 +11,12 @@ function Home() {
     (state) => state.post
   );
 
-
-
-
-
-
-
-
   const handleLoadMore = () => {
     dispatch(getGlobalPosts({ skip, limit }));
   };
 
 
-  return (
+  return (<>
     <div className="  ">
 
       
@@ -43,6 +35,8 @@ function Home() {
        
       </div>
     </div>
+    <Footer></Footer>
+</>
   );
 }
 

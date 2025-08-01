@@ -1,4 +1,3 @@
-import React from "react";
 import { FcGoogle,FcOk } from "react-icons/fc";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +5,7 @@ import { registerUser}  from '../../../features/auth/authSlice';
 import { Link } from 'react-router';
 import { useNavigate } from 'react-router';
 import Loader from "../Loader";
+import Footer from "../Footer/Footer";
 
 function Signup() {
 
@@ -25,7 +25,6 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     dispatch(registerUser(formData));
   };
 
@@ -34,7 +33,6 @@ function Signup() {
 
   useEffect(() => {
     if (loggedIn) {
-      console.log(loggedIn)
       navigate('/');
     }
   }, [loggedIn]);
@@ -56,7 +54,7 @@ function Signup() {
             className="relative -mb-px h-px w-full "
           
           ></div>
-          <div className="mx-5 border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl ">
+          <div className="mx-5 border dark:border-white/50 border-black/80  rounded-lg   lg:rounded-xl ">
             <div className="flex flex-col sm:p-6 p-4">
               <h3 className="text-xl font-semibold leading-6 tracking-tighter">
                 Signup
@@ -168,6 +166,7 @@ function Signup() {
         </div>
 
       </div>
+      <Footer></Footer>
     </>
   );
 }

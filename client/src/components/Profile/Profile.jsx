@@ -8,6 +8,8 @@ import { ImCross } from "react-icons/im";
 import { useEffect, useState } from "react";
 import { TiUpload } from "react-icons/ti";
 import { FaPlusCircle } from "react-icons/fa";
+import Footer from "../Footer/Footer";
+
 
 import axios from "axios";
 function Profile() {
@@ -206,6 +208,7 @@ function Profile() {
       </div>
 
       <ProfilePosts></ProfilePosts>
+<Footer></Footer>
     </>
   );
 }

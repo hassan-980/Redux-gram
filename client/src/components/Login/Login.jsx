@@ -6,13 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../../features/auth/authSlice';
 import { useNavigate } from 'react-router';
 import Loader from '../Loader';
+import Footer from '../Footer/Footer';
 
 
 
 function Login() {
 const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { loading, error, user,loggedIn } = useSelector((state) => state.auth);
+  const { loading, error, loggedIn } = useSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({ email: '', password: '' });
 
@@ -33,15 +34,14 @@ useEffect(() => {
 
 
 
-
   return (
     <>{loading ? (<Loader></Loader>) : null }
-<div className="bg-white dark:bg-black dark:text-white flex min-h-screen flex-col items-center  sm:justify-center sm:pt-0">
+<div className="bg-white dark:bg-black dark:text-white flex min-h-screen flex-col items-center sm:-mt-19  sm:justify-center sm:pt-0">
 
     <div className="relative mt-12 w-full max-w-lg sm:mt-10 ">
 
         <div
-            className="mx-5 border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl ">
+            className="mx-5 border dark:border-white/50 border-black/80  rounded-lg    lg:rounded-xl ">
             <div className="flex flex-col sm:p-6 p-4">
                 <h3 className="text-xl font-semibold leading-6 tracking-tighter">Login</h3>
                 <p className="mt-1.5 text-sm font-medium text-gray-400
@@ -112,6 +112,7 @@ useEffect(() => {
         </div>
     </div>
 </div>
+<Footer></Footer>
 </>
   )
 }

@@ -5,6 +5,7 @@ import { TiUpload } from "react-icons/ti";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
+import Footer from "../Footer/Footer";
 
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -193,6 +194,7 @@ function Createpost() {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </>
   );
 }

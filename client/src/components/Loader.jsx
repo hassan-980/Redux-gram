@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Loader() {
   return (
         <div className="fixed inset-0 z-[9999] bg-black/40 bg-opacity-50 flex items-center justify-center overflow-hidden">
