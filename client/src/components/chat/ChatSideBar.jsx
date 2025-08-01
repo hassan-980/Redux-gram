@@ -65,14 +65,21 @@ const ChatSidebar = () => {
                       className="rounded-full w-8 h-8 items-start sm:mx-3 mx-2  "
                       src={`${
                         import.meta.env.VITE_SERVER_URL
-                      }/api/user/get-profile-pic/${chat._id}` || "/avatar.jpg"}
+                      }/api/user/get-profile-pic/${chat._id}` }
                       onError={(e) => {
-                        e.target.onerror = null; // prevent infinite loop
+                        // e.target.onerror = null; // prevent infinite loop
                         e.target.src = "/avatar.jpg"; // path to your public avatar image
                       }}
                       
                       alt="image"
                     />
+
+                     {/* <img
+      className="rounded-full w-8 h-8 items-start sm:mx-3 mx-2"
+      src={imageError ? fallback : profileUrl}
+      onError={() => setImageError(true)}
+      alt="profile"
+    /> */}
                     {onlineUsers.includes(chat._id) ? (
                       <span className="absolute w-2 h-2 bg-green-600 rounded-full sm:left-9 left-8 bottom-0"></span>
                     ) : null}

@@ -24,7 +24,7 @@ import socket from "../../../utils/socket";
 import { setOnlineUsers } from "../../../features/users/userSlice";
 import { setOtherUsers } from "../../../features/users/userSlice";
 import axios from "axios";
-
+import toast from "react-hot-toast";
 function Navbar() {
   const [darkmode, setdarkmode] = useState("");
   const dispatch = useDispatch();
@@ -52,8 +52,10 @@ function Navbar() {
   useEffect(() => {
     if (darkmode) {
       document.querySelector("html").classList.add("dark");
+
     } else {
       document.querySelector("html").classList.remove("dark");
+
     }
   }, [darkmode]);
 
@@ -71,7 +73,7 @@ function Navbar() {
   useEffect(() => {
     
       dispatch(fetchUser())
-
+toast.success("Logged in successfully");
     
   }, [dispatch]);
 
@@ -87,7 +89,7 @@ function Navbar() {
         })
 
         .catch((err) => console.error(err));
-    }, []);
+    }, [dispatch,loggedIn]);
 
   useEffect(() => {
     dispatch(getGlobalPosts({ skip: 0, limit }));

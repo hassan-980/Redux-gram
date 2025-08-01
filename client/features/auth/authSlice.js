@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 axios.defaults.withCredentials = true;
-import { useNavigate } from "react-router";
-import { createPost } from "../posts/postslice";
 import socket from "../../utils/socket";
+import toast from "react-hot-toast";
 
 // const URL='https://redux-gram-server.onrender.com';
 
@@ -21,6 +20,7 @@ export const fetchUser = createAsyncThunk(
           withCredentials: true,
         }
       );
+
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue("Session expired");
@@ -39,7 +39,7 @@ export const loginUser = createAsyncThunk(
           password,
         }
       );
-
+    toast.success("Login successful");
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
@@ -91,6 +91,7 @@ export const registerUser = createAsyncThunk(
         email,
         password,
       });
+      toast.success("User Registered successfully");
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.message);
@@ -105,6 +106,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
       {},
       { withCredentials: true } 
     );
+    toast.success("Logout successful");
     return res.data;
   } catch (err) {
     return thunkAPI.rejectWithValue(

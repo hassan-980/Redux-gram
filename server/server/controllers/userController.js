@@ -112,7 +112,8 @@ export const updateProfilePic = async (req,res)=>{
 export const getProfilePic =async (req, res) => {
   try {
     const user = await userModel.findById(req.params.id);
-    if (!user || !user.profilePic || !user.profilePic || !user.profilePic.data) return res.status(404).send('No image');
+    
+    if (!user || !user.profilePic || !user.profilePic || !user.profilePic.data) return res.json('No image found');
 
     res.set('Content-Type', user.profilePic.contentType);
     res.send(user.profilePic.data);

@@ -9,22 +9,26 @@ import { useEffect, useState } from "react";
 import { TiUpload } from "react-icons/ti";
 import { FaPlusCircle } from "react-icons/fa";
 import Footer from "../Footer/Footer";
-
+import Loader from "../Loader";
+   import toast from "react-hot-toast";
 
 import axios from "axios";
 function Profile() {
   const { username, isverified, authuser } = useSelector((state) => state.auth);
-
   const [isUpdate, setIsUpdate] = useState(true);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [error, seterror] = useState(false);
+   const [loading, setloading] = useState(false);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setloading(true);
 
     const data = new FormData();
     data.append("image", imageFile);
+
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/api/user/update-profile-pic`,
@@ -32,17 +36,24 @@ function Profile() {
         {
           withCredentials: true,
         }
-      );
-      if (res.data.success) {
-        seterror(true);
-      }
+      )      .then( () => {
+          setloading(false);
+  seterror(true);
+  toast.success("Profile Picture updated successfully");
+   
+
+          
+        })
+
     } catch (error) {
       console.log(error);
+      setloading(false);
     }
   };
 
   return (
     <>
+    {loading ? <Loader></Loader> : null}
       <div
         className={` ${
           isUpdate && "hidden"
@@ -141,10 +152,6 @@ function Profile() {
         </div>
       </div>
 
-
-
-      
-
       <div className="bg-white dark:bg-black  dark:text-white flex   flex-col items-center  sm:justify-center ">
         <div className=" mt-25 sm:mb-8 w-full  max-w-lg  ">
           <div className="mx-3 border border-black/80  rounded-lg dark:border-white/50   lg:rounded-xl ">
@@ -152,32 +159,22 @@ function Profile() {
               <div className="h-32 w-32">
                 <div className="relative">
                   {authuser && (
-  <img
-    src={`${import.meta.env.VITE_SERVER_URL}/api/user/get-profile-pic/${authuser.id}` || "/avatar.jpg"}
-    alt="Profile"
-    className=" rounded-full object-cover  shadow-2xl"
-  />
-)}
-                  {/* <img
-                    src={authuser}
-                    onError={(e) => {
-                      e.target.onerror = null; // prevent infinite loop
-                      e.target.src = "/avatar.jpg"; // path to your public avatar image
-                    }}
-                    className="rounded-full object-cover h-full w-full shadow-2xl"
-                  /> */}
-
-
-
+                    <img
+                      src={`${
+                        import.meta.env.VITE_SERVER_URL
+                      }/api/user/get-profile-pic/${authuser.id}`}
+                      onError={(e) => {
+                        e.target.src = "/avatar.jpg";
+                      }}
+                      alt="Profile"
+                      className=" rounded-full object-cover w-32 h-32  shadow-2xl"
+                    />
+                  )}
 
                   <button className="flex" onClick={() => setIsUpdate(false)}>
                     <div className="absolute bottom-0 right-2 cursor-pointer  ">
-                       <FaPlusCircle className="text-2xl " />
-
+                      <FaPlusCircle className="text-2xl " />
                     </div>
-                   
-
-                    
                   </button>
                 </div>
               </div>
@@ -208,7 +205,7 @@ function Profile() {
       </div>
 
       <ProfilePosts></ProfilePosts>
-<Footer></Footer>
+      <Footer></Footer>
     </>
   );
 }

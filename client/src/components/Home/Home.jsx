@@ -25,7 +25,7 @@ function Home() {
           <Post key={post._id} post={post}></Post>
         ))}
 
-        {loading? (<div className="w-7  mt-4 h-7 border-3 mr-1 border-t-transparent dark:border-white border-black rounded-full animate-spin"></div>):(
+        {loading? (<div className="w-7  mt-4 h-7 border-3  border-t-transparent dark:border-white dark:border-t-black  border-black rounded-full animate-spin"></div>):(
            (posts.length === totalpost)?  (<p className="mt-6 text-sm font-bold text-gray-600">No more posts, you reached at the bottom
               </p>):(
           

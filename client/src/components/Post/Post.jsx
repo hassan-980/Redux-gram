@@ -6,6 +6,7 @@ import { FaComment } from "react-icons/fa";
 import axios from "axios";
 import { useLocation } from "react-router";
 import Loader from "../Loader";
+import toast from "react-hot-toast";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
@@ -24,7 +25,7 @@ function Post({ post }) {
         .then(async () => {
           setloading(false);
         });
-      alert("Post deleted");
+      toast.success("Post Deleted");
     } catch (err) {
       console.error("Delete failed:", err);
     }
@@ -43,17 +44,18 @@ function Post({ post }) {
           <div className="flex flex-col   sm:p-6  p-3">
             <div className="flex">
               <div className="w-full flex sm:mt-0 mt-2 mb-2 sm:mb-0 sm:mr-4">
-                <img
+               <img
                   className="rounded-full max-w-none sm:w-12 sm:h-12 w-10 h-10 object-cover"
-                  src={
+                  src={ 
 
                     `${URL}/api/user/get-profile-pic/${post.userId}`
 
                   }
 
                   onError={(e) => {
-    e.target.onerror = null; // prevent infinite loop
-    e.target.src = "/avatar.jpg"; // path to your public avatar image
+
+    e.target.src = "/avatar.jpg";
+
   }}
                 />
                 <div className=" flex flex-col">
@@ -86,7 +88,7 @@ function Post({ post }) {
                   <div>
                     {imageload && (
                       <div className="h-70 flex  items-center">
-                        <div className="w-7   mt-4 h-7 border-3 mr-1 border-t-transparent dark:border-white border-black rounded-full animate-spin"></div>
+                        <div className="w-7  mt-4 h-7 border-3  border-t-transparent dark:border-white dark:border-t-black  border-black rounded-full animate-spin"></div>
                       </div>
                     )}
 

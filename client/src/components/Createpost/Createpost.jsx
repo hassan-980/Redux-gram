@@ -6,9 +6,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
 import Footer from "../Footer/Footer";
+import toast from "react-hot-toast";
 
-import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+
+
 function Createpost() {
   const { loading, error,} = useSelector((state) => state.post);
 
@@ -36,12 +37,10 @@ function Createpost() {
     data.append("visibility", formData.visibility);
     data.append("image", imageFile);
      dispatch(createPost(data))
-    
-
-    
-
+    //  toast.success("Post created successfully");
 
   };
+
 
   return (
 
@@ -59,8 +58,10 @@ function Createpost() {
                 Welcome , create new post
               </p>
               {(error === "Post created successfully") ? (
-                <p className="text-green-700">{error}</p>
+                toast.success(error)
+                // <p className="text-green-700">{error}</p>
               ) : (
+                // toast.error(error)
                 <p className="text-red-500">{error}</p>
               )}
             </div>
