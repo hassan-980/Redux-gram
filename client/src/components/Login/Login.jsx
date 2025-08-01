@@ -54,7 +54,8 @@ useEffect(() => {
                     <div>
                         <div>
                             <div
-                                className=" relative rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
+                                className=" relative rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30"
+                                >
                                 <div className="flex justify-between">
                                     <label
                                         className="text-xs font-medium text-muted-foreground group-focus-within:text-white text-gray-400">Email</label>
@@ -68,7 +69,9 @@ useEffect(() => {
                                   
                                     className="block w-full border-0 dark:bg-black    p-0 text-sm  placeholder:text-gray-600 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground"/>
                             </div>
-                            <input type="email" />
+
+                     
+                           
                         </div>
                     </div>
                     <div className="mt-4">

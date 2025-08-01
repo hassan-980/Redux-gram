@@ -66,7 +66,7 @@ function Navbar() {
 
   useEffect(() => {
     dispatch(fetchUser());
-    toast.success("Logged in successfully");
+    toast.success("Login successfull");
   }, [dispatch]);
 
   useEffect(() => {
