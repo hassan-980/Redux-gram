@@ -11,7 +11,7 @@ import { GrAttachment } from "react-icons/gr";
 import { IoSend } from "react-icons/io5";
 
 const MessageInput = () => {
-  const [message, setMessage] = useState("");
+  const [msgs, setMessage] = useState("");
   const { selectedUser } = useSelector((store) => store.user);
   const { messages } = useSelector((store) => store.message);
   const { authuser } = useSelector((store) => store.auth);
@@ -21,9 +21,11 @@ const MessageInput = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      if (!message) {
+      if (!msgs) {
         return;
       }
+      const message = msgs;
+       setMessage("");
       const tempId = Date.now().toString();
       const now = new Date();
       dispatch(
@@ -54,7 +56,7 @@ const MessageInput = () => {
     } catch (error) {
       console.log(error);
     }
-    setMessage("");
+   
   };
 
   // const handleSend = () => {
@@ -88,7 +90,7 @@ const MessageInput = () => {
           type="text"
           className="block w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
           placeholder="Type a message..."
-          value={message}
+          value={msgs}
           onChange={(e) => setMessage(e.target.value)}
         />
 
