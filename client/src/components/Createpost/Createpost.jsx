@@ -48,8 +48,8 @@ function Createpost() {
 
       {loading ? <Loader></Loader> : null}
       <div className="bg-white dark:bg-black dark:text-white flex min-h-screen  flex-col items-center  sm:justify-center sm:pt-0">
-        <div className="relative mt-12 w-full mb-8  max-w-lg  sm:mt-10">
-          <div className="  mx-5 border dark:border-t-white/50 border-black/80  rounded-lg dark:border-white/20 dark:border-l-white/20 dark:border-r-white/50  lg:rounded-xl   ">
+        <div className="relative mt-5 w-full mb-8  max-w-lg  sm:mt-10">
+          <div className="  mx-5 border dark:border-white/50 border-black/80  rounded-lg  lg:rounded-xl   ">
             <div className="flex flex-col sm:p-6 p-4">
               <h3 className="text-xl font-semibold  tracking-tighter">
                 New Post
@@ -58,8 +58,8 @@ function Createpost() {
                 Welcome , create new post
               </p>
               {(error === "Post created successfully") ? (
-                toast.success(error)
-                // <p className="text-green-700">{error}</p>
+            
+                <p className="text-green-700">{error}</p>
               ) : (
                 // toast.error(error)
                 <p className="text-red-500">{error}</p>

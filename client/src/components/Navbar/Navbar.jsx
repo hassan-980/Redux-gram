@@ -46,62 +46,52 @@ function Navbar() {
 
   useEffect(() => {
     if (loggedIn) {
-    dispatch(getUserPosts());}
+      dispatch(getUserPosts());
+    }
   }, [loggedIn]);
 
   useEffect(() => {
     if (darkmode) {
       document.querySelector("html").classList.add("dark");
-
     } else {
       document.querySelector("html").classList.remove("dark");
-
     }
   }, [darkmode]);
 
-
-
-
   useEffect(() => {
-
     if (loggedIn) {
-      dispatch(fetchUser())
+      dispatch(fetchUser());
     }
-  }, [loggedIn])
-  
+  }, [loggedIn]);
 
   useEffect(() => {
-    
-      dispatch(fetchUser())
-toast.success("Logged in successfully");
-    
+    dispatch(fetchUser());
+    toast.success("Logged in successfully");
   }, [dispatch]);
 
-    useEffect(() => {
-      // setloading(true);
-      axios
-        .get(`${import.meta.env.VITE_SERVER_URL}/api/user/get-all-users`, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          // setChats(res.data.users);
-          dispatch(setOtherUsers(res.data.users));
-        })
+  useEffect(() => {
+    // setloading(true);
+    axios
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/user/get-all-users`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        // setChats(res.data.users);
+        dispatch(setOtherUsers(res.data.users));
+      })
 
-        .catch((err) => console.error(err));
-    }, [dispatch,loggedIn]);
+      .catch((err) => console.error(err));
+  }, [dispatch, loggedIn]);
 
   useEffect(() => {
     dispatch(getGlobalPosts({ skip: 0, limit }));
   }, [dispatch]);
 
-    useEffect(() => {
-      socket.on("getUsers", (users) => {
+  useEffect(() => {
+    socket.on("getUsers", (users) => {
       dispatch(setOnlineUsers(users));
     });
   }, []);
-
-
 
   return (
     <>
@@ -142,6 +132,24 @@ toast.success("Logged in successfully");
                 onClick={() => {
                   let newmode = !darkmode;
                   setdarkmode(newmode);
+                  if (newmode) {
+                    toast("Hello Dark!", {
+                      icon: "🌑",
+                      style: {
+                        borderRadius: "20px",
+                        background: "#333",
+                        color: "#fff",
+                      },
+                    });
+                  } else {
+                    toast("Hello Light!", {
+                      icon: "☀️",
+                      style: {
+                        borderRadius: "20px",
+                        color: "#333",
+                      },
+                    });
+                  }
                   localStorage.setItem("savedmode", newmode);
                 }}
               >

@@ -22,7 +22,11 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Navbar />
-           <Toaster />
+           <Toaster
+
+           containerClassName=" m-15"
+           
+           />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="profile" element={<Profile />} />

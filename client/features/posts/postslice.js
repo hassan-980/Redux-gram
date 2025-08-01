@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 axios.defaults.withCredentials = true;
 
 // const URL='https://redux-gram-server.onrender.com';
@@ -13,8 +14,13 @@ export const createPost = createAsyncThunk(
       const res = await axios.post(`${URL}/api/posts/create-post`, data, {
         withCredentials: true,
       });
+      if(res.data){
+        toast.success("Post created successfully");
+      }
+      
       return res.data;
     } catch (err) {
+      toast.error(err.response.data.message);
       return thunkAPI.rejectWithValue(err.response.data.message);
     }
   }
