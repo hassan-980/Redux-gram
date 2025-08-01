@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setOtherUsers, setSelectedUser } from "../../../features/users/userSlice";
+import {
+  setOtherUsers,
+  setSelectedUser,
+} from "../../../features/users/userSlice";
 import { FaSearch } from "react-icons/fa";
 const ChatSidebar = () => {
   // const {onlineUsers} = useSelector((state) => state.users);
-  const { selectedUser, onlineUsers, otherUsers } = useSelector((store) => store.user);
+  const { selectedUser, onlineUsers, otherUsers } = useSelector(
+    (store) => store.user
+  );
+  const { authuser } = useSelector((state) => state.auth);
   const [active, setAtive] = useState(false);
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
@@ -14,29 +20,69 @@ const ChatSidebar = () => {
   };
 
   return (
-    <> 
-      <div className={` ${ selectedUser===null ? '':'hidden'} sm:flex sm:flex-col sm:w-1/2 w-full bg-gray-100 dark:bg-black p-2 sm:p-4 dark:border  dark:border-r-white/50  `}>
+    <>
+      <div
+        className={` ${
+          selectedUser === null ? "" : "hidden"
+        } sm:flex sm:flex-col sm:w-1/2 w-full bg-gray-100 dark:bg-black p-2 sm:p-4 dark:border  dark:border-r-white/50  `}
+      >
         <h2 className="text-xl dark:text-white font-bold  mb-4">Chats</h2>
 
-        
-                    <div className="flex items-center w-full mb-3 ">
-                      <div className="flex   pl-2  w-full h-8 border dark:border-white rounded-full px-1  py-1">
-                        <input
-                          type="text"
-                          className="dark:text-white focus:outline-none p-2 "
-                          placeholder="search here"
-                        />
-             
-                      </div>
-                                 <button className="text-xl dark:text-white cursor-pointer ml-2">
-                          <FaSearch />
-                        </button>
-                    </div>
-                
+        <div className="flex items-center w-full mb-3 ">
+          <div className="flex   pl-2  w-full h-8 border dark:border-white rounded-full px-1  py-1">
+            <input
+              type="text"
+              className="dark:text-white focus:outline-none p-2 "
+              placeholder="search here"
+            />
+          </div>
+          <button className="text-xl dark:text-white cursor-pointer ml-2">
+            <FaSearch />
+          </button>
+        </div>
 
-       
- 
-         {/* <form onSubmit={(e) => e.preventDefault() } action="" className='flex items-center gap-2'>
+        <div className="flex mb-2 overflow-auto ">
+          {authuser && (
+            <div className="relative ">
+              <img
+                src={`${
+                  import.meta.env.VITE_SERVER_URL
+                }/api/user/get-profile-pic/${authuser.id}`}
+                onError={(e) => {
+                  e.target.src = "/avatar.jpg";
+                }}
+                alt="Profile"
+                className=" rounded-full object-cover w-17 h-17  "
+              />
+              <span className="absolute w-3 h-3 bg-green-600 rounded-full left-13  bottom-0"></span>
+            </div>
+          )}
+
+                  {otherUsers?.map((chat) =>
+          onlineUsers.includes(chat._id) ? (
+            <div className="relative ml-2">
+              <img
+                src={`${
+                  import.meta.env.VITE_SERVER_URL
+                }/api/user/get-profile-pic/${chat._id}`}
+                onError={(e) => {
+                  e.target.src = "/avatar.jpg";
+                }}
+                alt="Profile"
+                className=" rounded-full object-cover w-17 h-17  "
+              />
+              <span className="absolute w-3 h-3 bg-green-600 rounded-full left-13  bottom-0"></span>
+            </div>
+          ) : null
+        )}
+
+
+          
+        </div>
+
+
+
+        {/* <form onSubmit={(e) => e.preventDefault() } action="" className='flex items-center gap-2'>
                 <input
                     value={search}
                     onChange={(e)=>setSearch(e.target.value)}
@@ -64,16 +110,15 @@ const ChatSidebar = () => {
                       className="rounded-full  w-10 h-10 items-start mx-3   "
                       src={`${
                         import.meta.env.VITE_SERVER_URL
-                      }/api/user/get-profile-pic/${chat._id}` }
+                      }/api/user/get-profile-pic/${chat._id}`}
                       onError={(e) => {
                         // e.target.onerror = null; // prevent infinite loop
                         e.target.src = "/avatar.jpg"; // path to your public avatar image
                       }}
-                      
                       alt="image"
                     />
 
-                     {/* <img
+                    {/* <img
       className="rounded-full w-8 h-8 items-start sm:mx-3 mx-2"
       src={imageError ? fallback : profileUrl}
       onError={() => setImageError(true)}
