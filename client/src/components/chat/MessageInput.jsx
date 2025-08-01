@@ -2,7 +2,11 @@ import { useState } from "react";
 import socket from "../../../utils/socket";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setMessages, setNewMessage } from "../../../features/messages/messageSlice";
+import {
+  setMessages,
+  setNewMessage,
+  updateMessageId
+} from "../../../features/messages/messageSlice";
 import { GrAttachment } from "react-icons/gr";
 import { IoSend } from "react-icons/io5";
 
@@ -17,9 +21,22 @@ const MessageInput = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      if(!message){
-        return
+      if (!message) {
+        return;
       }
+      const tempId = Date.now().toString();
+      const now = new Date();
+      dispatch(
+        setNewMessage({
+          _id: tempId,
+          message: message,
+          receiverId: selectedUser._id,
+          senderId: authuser.id,
+          seen: false,
+          createdAt: now.toISOString(),
+        })
+      );
+
       const res = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/api/message/send-message/${
           selectedUser?._id
@@ -31,16 +48,14 @@ const MessageInput = () => {
       );
 
       const msg = res?.data?.newMessage;
-      dispatch(setNewMessage(res?.data?.newMessage));
-    socket.emit("sendMessage", msg);
-
+        dispatch(updateMessageId({ tempId, id: res?.data?.newMessage?._id }));
+      // dispatch(setNewMessage(res?.data?.newMessage));
+      socket.emit("sendMessage", msg);
     } catch (error) {
       console.log(error);
     }
     setMessage("");
   };
-
-
 
   // const handleSend = () => {
   //   if (text.trim() === "") return;
@@ -53,7 +68,7 @@ const MessageInput = () => {
 
   //   socket.emit("sendMessage", msg);
   //   dispatch(set({ ...msg, self: true }));
-    
+
   // };
 
   // const handleSend = () => {

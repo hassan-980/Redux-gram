@@ -58,16 +58,12 @@ function Navbar() {
     }
   }, [darkmode]);
 
-  useEffect(() => {
-    if (loggedIn) {
-      dispatch(fetchUser());
-    }
-  }, [loggedIn]);
-
-  useEffect(() => {
+    useEffect(() => {
     dispatch(fetchUser());
-    toast.success("Login successfull");
   }, [dispatch]);
+
+
+
 
   useEffect(() => {
     // setloading(true);

@@ -115,7 +115,7 @@ const ChatWindow = () => {
           <div className="  relative w-full sm:h-[55vh] h-[57vh]  sm:p-6 p-2  overflow-y-auto hide-scrollbar">
             <ul className="space-y-2">
               {messages?.map((data) => (
-                // console.log(data),
+                console.log(data),
                 <li
                   ref={messagesEndRef}
                   key={data._id}

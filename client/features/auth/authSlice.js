@@ -20,6 +20,9 @@ export const fetchUser = createAsyncThunk(
           withCredentials: true,
         }
       );
+      if(res.data.success){
+        toast.success("Login successful");
+      }
 
       return res.data;
     } catch (err) {
@@ -40,6 +43,7 @@ export const loginUser = createAsyncThunk(
         }
       );
     toast.success("Login successful");
+    fetchUser();
       return response.data;
     } catch (error) {
       toast.error(error.response.data.message);
@@ -60,6 +64,7 @@ export const verifyEmail = createAsyncThunk(
 
       return res.data;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
@@ -74,6 +79,7 @@ export const sendEmailVerifyOtp = createAsyncThunk(
         {}, // no body data
         { withCredentials: true } // send cookie
       );
+      toast.success("OTP sent successfully");
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(
