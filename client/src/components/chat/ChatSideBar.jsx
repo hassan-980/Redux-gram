@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setOtherUsers, setSelectedUser } from "../../../features/users/userSlice";
-
+import { FaSearch } from "react-icons/fa";
 const ChatSidebar = () => {
   // const {onlineUsers} = useSelector((state) => state.users);
   const { selectedUser, onlineUsers, otherUsers } = useSelector((store) => store.user);
@@ -18,7 +18,25 @@ const ChatSidebar = () => {
       <div className={` ${ selectedUser===null ? '':'hidden'} sm:flex sm:flex-col sm:w-1/2 w-full bg-gray-100 dark:bg-black p-2 sm:p-4 dark:border  dark:border-r-white/50  `}>
         <h2 className="text-xl dark:text-white font-bold  mb-4">Chats</h2>
 
-        {/* <form onSubmit={(e) => e.preventDefault() } action="" className='flex items-center gap-2'>
+        
+                    <div className="flex items-center w-full mb-3 ">
+                      <div className="flex   pl-2  w-full h-8 border dark:border-white rounded-full px-1  py-1">
+                        <input
+                          type="text"
+                          className="dark:text-white focus:outline-none p-2 "
+                          placeholder="search here"
+                        />
+             
+                      </div>
+                                 <button className="text-xl dark:text-white cursor-pointer ml-2">
+                          <FaSearch />
+                        </button>
+                    </div>
+                
+
+       
+ 
+         {/* <form onSubmit={(e) => e.preventDefault() } action="" className='flex items-center gap-2'>
                 <input
                     value={search}
                     onChange={(e)=>setSearch(e.target.value)}
@@ -26,9 +44,9 @@ const ChatSidebar = () => {
                     placeholder='Search...'
                 />
                 <button type='submit' className='btn bg-zinc-700 text-white'>
-                    <BiSearchAlt2 className='w-6 h-6 outline-none'/>
+                     <BiSearchAlt2 className='w-6 h-6 outline-none'/> 
                 </button>
-            </form> */}
+            </form>   */}
 
         <div className="overflow-auto flex flex-col">
           <div className=" w-full    overflow-y-auto ">
@@ -43,7 +61,7 @@ const ChatSidebar = () => {
                 <div className="flex items-center">
                   <div className="relative ">
                     <img
-                      className="rounded-full w-8 h-8 items-start sm:mx-3 mx-2  "
+                      className="rounded-full  w-10 h-10 items-start mx-3   "
                       src={`${
                         import.meta.env.VITE_SERVER_URL
                       }/api/user/get-profile-pic/${chat._id}` }
@@ -62,13 +80,13 @@ const ChatSidebar = () => {
       alt="profile"
     /> */}
                     {onlineUsers.includes(chat._id) ? (
-                      <span className="absolute w-2 h-2 bg-green-600 rounded-full sm:left-9 left-8 bottom-0"></span>
+                      <span className="absolute w-2 h-2 bg-green-600 rounded-full left-10  bottom-0"></span>
                     ) : null}
                     {/* <span className="absolute w-2 h-2  bg-green-600 rounded-full left-9 bottom-0 "></span> */}
                   </div>
 
                   <div>
-                    <h4 className="text-sm font-semibold dark:text-white text-gray-900">
+                    <h4 className="sm:text-sm font-semibold dark:text-white text-gray-900">
                       {chat.username}
                     </h4>
                     {/* <div className="text-[12px]">Hello Lauren 👋, · 24 Mar</div> */}

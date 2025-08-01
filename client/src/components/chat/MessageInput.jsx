@@ -94,21 +94,21 @@ const MessageInput = () => {
           onChange={(e) => setMessage(e.target.value)}
         />
 
-        {/* <div className="flex  justify-center items-center mr-3">
+        <div className="flex  justify-center items-center mr-3">
           <div className=" relative ">
-            <input
+            {/* <input
               type="file"
               className="absolute inset-0 w-full h-full opacity-0 z-30"
               name="image"
               onChange={(e) => {
                 setImageFile(e.target.files[0]);
               }}
-            />
+            /> */}
             <div className="flex flex-col justify-center items-center ">
               <GrAttachment className="text-2xl" />
             </div>
           </div>
-        </div> */}
+        </div>
 
         <button type="submit">
           <IoSend className="text-xl dark:text-white  cursor-pointer" />
