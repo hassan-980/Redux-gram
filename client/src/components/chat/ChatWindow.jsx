@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { TiTick } from "react-icons/ti";
 import fetchMessages from "../../../hooks/fetchMessages";
 import { useRef } from "react";
-
+import { MdOutlineArrowBackIos } from "react-icons/md";
+import { setSelectedUser } from "../../../features/users/userSlice";
 import {
   setNewMessage,
   updateSeen,
@@ -74,14 +75,26 @@ const ChatWindow = () => {
   return (
     <>
       {selectedUser === null ? (
-        <div className=" w-full   flex justify-center items-center">
+        <div className=" w-full hidden  sm:flex justify-center items-center">
           <h1 className=" font-extrabold dark:text-white text-xl">
             let's start a chat
           </h1>
         </div>
       ) : (
-        <div className=" w-full lg:col-span-2 lg:block ">
+        <div className=" w-full  lg:col-span-2 lg:block ">
+            
           <div className="relative flex items-center p-3 border-b border-gray-300">
+         <button 
+         className="cursor-pointer flex sm:hidden"
+         onClick={
+           () => {
+             dispatch(setSelectedUser(null));
+           }
+         }
+         
+         >
+              <MdOutlineArrowBackIos className=" dark:text-white text-xl mr-2" />
+            </button>
             <img
               className="object-cover w-10 h-10 rounded-full"
               src={`${
@@ -98,14 +111,15 @@ const ChatWindow = () => {
             </span>
             {onlineUsers.includes(selectedUser._id) ? (
               <div>
-                <span className="absolute w-3 h-3 bg-green-600 rounded-full left-10 bottom-3"></span>
+                <span className="absolute w-3 h-3 bg-green-600 rounded-full sm:left-10
+                left-17 bottom-3"></span>
 
-                <span className="absolute left-15 bottom-3 text-xs text-gray-400">
+                <span className="absolute left-22 sm:left-15 bottom-3 text-xs text-gray-400">
                   Online
                 </span>
               </div>
             ) : (
-              <span className="absolute left-15 bottom-3 text-xs text-gray-400">
+              <span className="absolute left-22 sm:left-15 bottom-3 text-xs text-gray-400">
                 Offline
               </span>
             )}

@@ -1,31 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Loader from "../Loader";
 import { useSelector, useDispatch } from "react-redux";
-import { BiSearchAlt2 } from "react-icons/bi";
 import { setOtherUsers, setSelectedUser } from "../../../features/users/userSlice";
 
 const ChatSidebar = () => {
   // const {onlineUsers} = useSelector((state) => state.users);
   const { selectedUser, onlineUsers, otherUsers } = useSelector((store) => store.user);
-  const [Chats, setChats] = useState([]);
-  const [loading, setloading] = useState("false");
+  const [active, setAtive] = useState(false);
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   setloading(true);
-  //   axios
-  //     .get(`${import.meta.env.VITE_SERVER_URL}/api/user/get-all-users`, {
-  //       withCredentials: true,
-  //     })
-  //     .then((res) => {
-  //       setChats(res.data.users);
-  //       dispatch(setOtherUsers(res.data.users));
-  //     })
-  //     .then(() => setloading(false))
-  //     .catch((err) => console.error(err));
-  // }, []);
 
   const selectedUserHandler = (user) => {
     dispatch(setSelectedUser(user));
@@ -33,8 +15,7 @@ const ChatSidebar = () => {
 
   return (
     <> 
-      {/* {loading ? <Loader></Loader> : null} */}
-      <div className="w-1/2 bg-gray-100 dark:bg-black p-2 sm:p-4 dark:border  dark:border-r-white/50  ">
+      <div className={` ${ selectedUser===null ? '':'hidden'} sm:flex sm:flex-col sm:w-1/2 w-full bg-gray-100 dark:bg-black p-2 sm:p-4 dark:border  dark:border-r-white/50  `}>
         <h2 className="text-xl dark:text-white font-bold  mb-4">Chats</h2>
 
         {/* <form onSubmit={(e) => e.preventDefault() } action="" className='flex items-center gap-2'>
