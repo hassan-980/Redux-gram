@@ -7,6 +7,7 @@ import fetchMessages from "../../../hooks/fetchMessages";
 import { useRef } from "react";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { setSelectedUser } from "../../../features/users/userSlice";
+import { MdVerified } from "react-icons/md";
 import {
   setNewMessage,
   updateSeen,
@@ -106,8 +107,11 @@ const ChatWindow = () => {
               }}
               alt="username"
             />
-            <span className="block ml-2 mb-2 font-bold text-gray-600 dark:text-white">
+            <span className="flex ml-2 mb-2 font-bold text-gray-600 dark:text-white">
               {selectedUser.username}
+              {selectedUser.isVerified ? (
+                                    <MdVerified className="text-blue-800 text-xl pl-1 pt-1" />
+                                  ) : null}
             </span>
             {onlineUsers.includes(selectedUser._id) ? (
               <div>

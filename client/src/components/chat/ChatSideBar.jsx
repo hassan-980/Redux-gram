@@ -5,6 +5,7 @@ import {
   setSelectedUser,
 } from "../../../features/users/userSlice";
 import { FaSearch } from "react-icons/fa";
+import { MdVerified } from "react-icons/md";
 const ChatSidebar = () => {
   const { selectedUser, onlineUsers, otherUsers } = useSelector(
     (store) => store.user
@@ -28,10 +29,10 @@ const ChatSidebar = () => {
         <h2 className="text-xl dark:text-white font-bold  mb-4">Chats</h2>
 
         <div className="flex items-center w-full mb-3 ">
-          <div className="flex   pl-2  w-full h-8 border dark:border-white rounded-full px-1  py-1">
+          <div className="flex   pl-2  w-full  border dark:border-white rounded-full px-1  py-1">
             <input
               type="text"
-              className="dark:text-white focus:outline-none p-2 "
+              className="dark:text-white focus:outline-none p-1 "
               placeholder="search here"
             />
           </div>
@@ -129,8 +130,11 @@ const ChatSidebar = () => {
                   </div>
 
                   <div>
-                    <h4 className="sm:text-sm font-semibold dark:text-white text-gray-900">
+                    <h4 className="sm:text-sm flex font-semibold dark:text-white text-gray-900">
                       {chat.username}
+                                    {chat.isVerified ? (
+                                                          <MdVerified className="text-blue-800 text-xl pl-1 pt-1" />
+                                                        ) : null}
                     </h4>
                     {/* <div className="text-[12px]">Hello Lauren 👋, · 24 Mar</div> */}
                   </div>
