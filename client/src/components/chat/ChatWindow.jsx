@@ -126,26 +126,34 @@ const ChatWindow = () => {
           </div>
 
          
-          <div className="  relative w-full sm:h-[55vh] h-[57vh]  sm:p-6 p-2  overflow-y-auto hide-scrollbar">
-            <ul className="space-y-2">
+          <div className="  relative w-full sm:h-[55vh]      h-[calc(100vh-272px)] sm:p-6 p-2  overflow-y-auto hide-scrollbar">
+            <div className="">
+               <ul className="space-y-2">
               {messages?.map((data) => (
-                console.log(data),
-                <li
-                  ref={messagesEndRef}
+
+                <li 
+                                  ref={messagesEndRef}
                   key={data._id}
-                  className={`flex   ${
-                    data.senderId === authuser.id
-                      ? "justify-end"
-                      : "justify-start"
-                  }  `}
-                >
-                  <div className="relative max-w-xl m-1 px-4 py-2 text-gray-700 bg-white dark:bg-gray-600 dark:text-white rounded shadow">
-                    <span className="flex">
-                      <span className="block ">{data.message}</span>
-                      <span className="   text-gray-400 mt-2 ml-2   text-xs ">
-                        {data.createdAt.slice(11, 16)}
-                      </span>
-                    </span>
+                 className={"flex flex-col mb-4  " +   ( data.senderId === authuser.id ? "items-end" : "items-start")}>
+                            {/* <div className="text-xs opacity-80 mb-2 text-slate-300 font-medium">
+                                hello
+                                <time className='ml-2 opacity-50'>2 hour ago</time>
+                            </div> */}
+                            <div className="relative">
+                               <div className={`max-w-xs flex lg:max-w-md px-4 py-3 rounded-2xl shadow-lg backdrop-blur-sm ${
+                                data.senderId === authuser.id
+                                    ? 'bg-gradient-to-r from-pink-500  to-rose-500 text-white rounded-br-md'
+                                    : 'bg-gradient-to-r from-purple-500  to-blue-500 text-white rounded-bl-md'
+                            }`}>
+                                <div className='text-sm leading-relaxed'>{data.message}</div>
+
+
+                                 <span className="flex    text-gray-200 mt-2 ml-2    text-xs ">
+                         {data.createdAt.slice(11, 16)}
+                       </span>
+
+                            </div>
+                            
 
                     {data.senderId === authuser.id ? (
                       data.seen === true ? (
@@ -164,10 +172,64 @@ const ChatWindow = () => {
                         </span>
                       )
                     ) : null}
-                  </div>
-                </li>
+
+                            </div>
+                          
+                            
+
+
+                            {/* <div 
+                            className={`text-xs opacity-60  text-slate-400 text-right
+                            }`}>
+                                Seen
+                            </div> */}
+                        </li>
+
+
+             
+                // <li
+                //   ref={messagesEndRef}
+                //   key={data._id}
+                //   className={`flex  ${
+                //     data.senderId === authuser.id
+                //       ? "justify-end"
+                //       : "justify-start mr-15"
+                //   }  `}
+                // >
+
+
+                //   <div className="relative max-w-xl m-1 px-4 py-2 text-gray-700 bg-white dark:bg-gray-600 dark:text-white rounded shadow">
+                //     <span className="flex">
+                //       <span className="block ">{data.message}</span>
+                //       <span className="   text-gray-400 mt-2 ml-2   text-xs ">
+                //         {data.createdAt.slice(11, 16)}
+                //       </span>
+                //     </span>
+
+                //     {data.senderId === authuser.id ? (
+                //       data.seen === true ? (
+                //         <span className=" absolute right-0  text-blue-600 -bottom-3   text-xs ">
+                //           <span className="flex">
+                //             <TiTick className="-mr-2" />
+                //             <TiTick />
+                //           </span>
+                //         </span>
+                //       ) : (
+                //         <span className=" absolute right-0 text-gray-400 -bottom-3   text-xs ">
+                //           <span className="flex">
+                //             <TiTick className="-mr-2" />
+                //             <TiTick />
+                //           </span>
+                //         </span>
+                //       )
+                //     ) : null}
+                //   </div>
+                // </li>
               ))}
             </ul>
+
+             </div>
+           
              
           </div>
 
@@ -180,3 +242,45 @@ const ChatWindow = () => {
 };
 
 export default ChatWindow;
+
+
+
+<div  className={"flex flex-col mb-6 " +  "items-end"}>
+                            {/* <div className="text-xs opacity-80 mb-2 text-slate-300 font-medium">
+hello
+                                <time className='ml-2 opacity-50'>2 hour ago</time>
+                            </div> */}
+                            <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-lg backdrop-blur-sm 
+                              
+                                     bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-br-md`
+                                  }>
+                                <div className='text-sm leading-relaxed'>hellobtjrehtkberktbhebt</div>
+                            </div>
+                            <div 
+                            className={`text-xs opacity-60 mt-2 text-slate-400 text-right
+                            }`}>
+                                Seen
+                            </div>
+                        </div>
+
+
+
+         {/* <div  className={"flex flex-col mb-6 " + (user.firstName === msg.firstName ? "items-end" : "items-start")}>
+                            <div className="text-xs opacity-80 mb-2 text-slate-300 font-medium">
+                                {`${msg.firstName} ${msg.lastName}`}
+                                <time className='ml-2 opacity-50'>2 hour ago</time>
+                            </div>
+                            <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-lg backdrop-blur-sm ${
+                                user.firstName === msg.firstName
+                                    ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-br-md'
+                                    : 'bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-bl-md'
+                            }`}>
+                                <div className='text-sm leading-relaxed'>{msg.text}</div>
+                            </div>
+                            <div 
+                            className={`text-xs opacity-60 mt-2 text-slate-400 ${
+                                user.firstName === msg.firstName ? 'text-right' : 'text-left'
+                            }`}>
+                                Seen
+                            </div>
+                        </div> */}

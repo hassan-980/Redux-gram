@@ -7,7 +7,7 @@ import Message from "../config/models/messageModel.js";
 export const getUserData = async (req, res) => {
   try {
     const userId = req.userId;
-    const user = await userModel.findById(userId);
+    const user = await userModel.findById(userId,{'profilePic.data':0});
     if (!user) {
       return res.json({ success: false, message: "User not found" });
     }
@@ -52,27 +52,18 @@ export const deleteUser = async (req, res) => {
 export const getAllUsers = async (req, res) => {
   try {
     const loggedInserId = req.userId;
-    const users = await userModel.find({ _id: { $ne: loggedInserId }}, '_id username profilePic isVerified ');
+    const usersData = await userModel.find({ _id: { $ne: loggedInserId }},  {   _id: 1, username: 1, isVerified: 1, profilePic: 1 });
 
-    //count number of messages not seen
-    const unseenMessages = {};
-    const promises = users.map(async (user) => {
-      const messages = await Message.find({
-        senderId: user._id,
-        receiverId: loggedInserId,
-        seen: false,
-      });
-      if(messages.length >0){
-        unseenMessages[user._id] = messages.length;
-      }
-      
-    })
-
-    await Promise.all(promises)
+    const users = usersData.map(user => {
+  if (user.profilePic) {
+    user.profilePic.data = '';
+  }
+  return user;
+});
     
     res.json({
       success: true,
-      users , unseenMessages
+      users 
     });
   } catch (error) {
     console.log(error.message)

@@ -7,13 +7,14 @@ import axios from "axios";
 import { useLocation } from "react-router";
 import Loader from "../Loader";
 import toast from "react-hot-toast";
-
+import { deletePost } from "../../../features/posts/postslice";
 const URL = import.meta.env.VITE_SERVER_URL;
-
+import { useDispatch } from "react-redux";
 function Post({ post }) {
   const location = useLocation();
   const [imageload, setimageload] = useState(true);
   const [loading, setloading] = useState(false);
+  const dispatch = useDispatch();
 
   const handleDelete = async (postId) => {
     setloading(true);
@@ -23,9 +24,12 @@ function Post({ post }) {
           withCredentials: true,
         })
         .then(async () => {
+          dispatch(deletePost(postId));
           setloading(false);
         });
+
       toast.success("Post Deleted");
+
     } catch (err) {
       console.error("Delete failed:", err);
     }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import { Link } from "react-router";
 import { createPost } from "../../../features/posts/postslice";
 import { TiUpload } from "react-icons/ti";
@@ -7,11 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
 import Footer from "../Footer/Footer";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 
 
 function Createpost() {
   const { loading, error,} = useSelector((state) => state.post);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const MAX_FILE_SIZE = 3 * 1024 * 1024; // 3 MB
@@ -37,6 +39,7 @@ function Createpost() {
     data.append("visibility", formData.visibility);
     data.append("image", imageFile);
      dispatch(createPost(data))
+    navigate("/");
     //  toast.success("Post created successfully");
 
   };

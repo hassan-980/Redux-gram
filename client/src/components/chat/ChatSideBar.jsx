@@ -6,7 +6,6 @@ import {
 } from "../../../features/users/userSlice";
 import { FaSearch } from "react-icons/fa";
 const ChatSidebar = () => {
-  // const {onlineUsers} = useSelector((state) => state.users);
   const { selectedUser, onlineUsers, otherUsers } = useSelector(
     (store) => store.user
   );
@@ -58,29 +57,30 @@ const ChatSidebar = () => {
             </div>
           )}
 
-                  {otherUsers?.map((chat) =>
-          onlineUsers.includes(chat._id) ? (
-            <div className="relative ml-2">
-              <img
-                src={`${
-                  import.meta.env.VITE_SERVER_URL
-                }/api/user/get-profile-pic/${chat._id}`}
-                onError={(e) => {
-                  e.target.src = "/avatar.jpg";
-                }}
-                alt="Profile"
-                className=" rounded-full object-cover w-17 h-17  "
-              />
-              <span className="absolute w-3 h-3 bg-green-600 rounded-full left-13  bottom-0"></span>
-            </div>
-          ) : null
-        )}
+          {otherUsers?.map((chat) =>
+            onlineUsers.includes(chat._id) ? (
+              <div className="relative ml-2">
+                {chat.profilePic.contentType  ? (
+                  <img
+                    src={`${
+                      import.meta.env.VITE_SERVER_URL
+                    }/api/user/get-profile-pic/${chat._id}`}
+                    alt="Profile"
+                    className=" rounded-full object-cover w-17 h-17  "
+                  />
+                ) : (
+                  <img
+                    src="/avatar.jpg"
+                    alt="Profile"
+                    className=" rounded-full object-cover w-17 h-17  "
+                  />
+                )}
 
-
-          
+                <span className="absolute w-3 h-3 bg-green-600 rounded-full left-13  bottom-0"></span>
+              </div>
+            ) : null
+          )}
         </div>
-
-
 
         {/* <form onSubmit={(e) => e.preventDefault() } action="" className='flex items-center gap-2'>
                 <input
@@ -106,24 +106,22 @@ const ChatSidebar = () => {
               >
                 <div className="flex items-center">
                   <div className="relative ">
-                    <img
-                      className="rounded-full  w-10 h-10 items-start mx-3   "
-                      src={`${
-                        import.meta.env.VITE_SERVER_URL
-                      }/api/user/get-profile-pic/${chat._id}`}
-                      onError={(e) => {
-                        // e.target.onerror = null; // prevent infinite loop
-                        e.target.src = "/avatar.jpg"; // path to your public avatar image
-                      }}
-                      alt="image"
-                    />
+                    {chat.profilePic.contentType ? (
+                      <img
+                        className="rounded-full  w-10 h-10 items-start mx-3   "
+                        src={`${
+                          import.meta.env.VITE_SERVER_URL
+                        }/api/user/get-profile-pic/${chat._id}`}
+                        alt="image"
+                      />
+                    ) : (
+                      <img
+                        className="rounded-full  w-10 h-10 items-start mx-3   "
+                        src="/avatar.jpg"
+                        alt="image"
+                      />
+                    )}
 
-                    {/* <img
-      className="rounded-full w-8 h-8 items-start sm:mx-3 mx-2"
-      src={imageError ? fallback : profileUrl}
-      onError={() => setImageError(true)}
-      alt="profile"
-    /> */}
                     {onlineUsers.includes(chat._id) ? (
                       <span className="absolute w-2 h-2 bg-green-600 rounded-full left-10  bottom-0"></span>
                     ) : null}

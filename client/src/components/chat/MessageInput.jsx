@@ -52,7 +52,11 @@ const MessageInput = () => {
       const msg = res?.data?.newMessage;
         dispatch(updateMessageId({ tempId, id: res?.data?.newMessage?._id }));
       // dispatch(setNewMessage(res?.data?.newMessage));
-      socket.emit("sendMessage", msg);
+      console.log(msg);
+      if(msg.receiverId=== selectedUser._id){
+          socket.emit("sendMessage", msg);
+      }
+      
     } catch (error) {
       console.log(error);
     }
@@ -105,7 +109,7 @@ const MessageInput = () => {
               }}
             /> */}
             <div className="flex flex-col justify-center items-center ">
-              <GrAttachment className="text-2xl" />
+              <GrAttachment className="text-2xl dark:text-white" />
             </div>
           </div>
         </div>

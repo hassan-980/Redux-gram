@@ -3,7 +3,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 axios.defaults.withCredentials = true;
 
+
 // const URL='https://redux-gram-server.onrender.com';
+
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
@@ -15,7 +17,8 @@ export const createPost = createAsyncThunk(
         withCredentials: true,
       });
       if(res.data){
-        toast.success("Post created successfully");
+
+        toast.success("Post created ");
       }
       
       return res.data;
@@ -69,7 +72,13 @@ export const postSlice = createSlice({
     userposts: [],
   },
 
-  reducers: {},
+  reducers: {
+    deletePost: (state, action) => {
+      state.posts = state.posts.filter((post) => post._id !== action.payload);
+      state.userposts = state.userposts.filter((post) => post._id !== action.payload);
+    }
+
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getGlobalPosts.pending, (state) => {
@@ -117,5 +126,5 @@ export const postSlice = createSlice({
   },
 });
 
-export const {} = postSlice.actions;
+export const {deletePost} = postSlice.actions;
 export default postSlice.reducer;
