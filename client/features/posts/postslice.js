@@ -3,10 +3,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 axios.defaults.withCredentials = true;
 
-
-// const URL='https://redux-gram-server.onrender.com';
-
-
 const URL = import.meta.env.VITE_SERVER_URL;
 
 export const createPost = createAsyncThunk(
@@ -16,11 +12,9 @@ export const createPost = createAsyncThunk(
       const res = await axios.post(`${URL}/api/posts/create-post`, data, {
         withCredentials: true,
       });
-      if(res.data){
-
+      if (res.data) {
         toast.success("Post created ");
       }
-      
       return res.data;
     } catch (err) {
       toast.error(err.response.data.message);
@@ -75,9 +69,10 @@ export const postSlice = createSlice({
   reducers: {
     deletePost: (state, action) => {
       state.posts = state.posts.filter((post) => post._id !== action.payload);
-      state.userposts = state.userposts.filter((post) => post._id !== action.payload);
-    }
-
+      state.userposts = state.userposts.filter(
+        (post) => post._id !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -94,7 +89,6 @@ export const postSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-
       //CREATE POST
       .addCase(createPost.pending, (state) => {
         state.loading = true;
@@ -110,7 +104,6 @@ export const postSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-
       //GET USER POSTS
       .addCase(getUserPosts.pending, (state) => {
         state.loading = true;
@@ -126,5 +119,5 @@ export const postSlice = createSlice({
   },
 });
 
-export const {deletePost} = postSlice.actions;
+export const { deletePost } = postSlice.actions;
 export default postSlice.reducer;

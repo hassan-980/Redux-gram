@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setOtherUsers,
-  setSelectedUser,
-} from "../../../features/users/userSlice";
+import { setSelectedUser } from "../../../features/users/userSlice";
 import { FaSearch } from "react-icons/fa";
 import { MdVerified } from "react-icons/md";
 const ChatSidebar = () => {
@@ -11,10 +7,7 @@ const ChatSidebar = () => {
     (store) => store.user
   );
   const { authuser } = useSelector((state) => state.auth);
-  const [active, setAtive] = useState(false);
-  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-
   const selectedUserHandler = (user) => {
     dispatch(setSelectedUser(user));
   };
@@ -41,10 +34,12 @@ const ChatSidebar = () => {
           </button>
         </div>
 
-        <div className="flex mb-2 overflow-auto ">
-          {authuser && (
+        <div className="flex mb-2 overflow-auto  ">
+          {
             <div className="relative ">
-              <img
+
+               {authuser?.profilePic.contentType ? (
+                  <img
                 src={`${
                   import.meta.env.VITE_SERVER_URL
                 }/api/user/get-profile-pic/${authuser.id}`}
@@ -54,14 +49,25 @@ const ChatSidebar = () => {
                 alt="Profile"
                 className=" rounded-full object-cover w-17 h-17  "
               />
+                ) : (
+                  <img
+                    src="/avatar.jpg"
+                    alt="Profile"
+                    className=" rounded-full object-cover w-17 h-17  "
+                  />
+                )}
+
+
+
+
               <span className="absolute w-3 h-3 bg-green-600 rounded-full left-13  bottom-0"></span>
             </div>
-          )}
+          }
 
           {otherUsers?.map((chat) =>
             onlineUsers.includes(chat._id) ? (
-              <div className="relative ml-2">
-                {chat.profilePic.contentType  ? (
+              <div key={chat._id} className="relative ml-2">
+                {chat.profilePic.contentType ? (
                   <img
                     src={`${
                       import.meta.env.VITE_SERVER_URL
@@ -82,19 +88,6 @@ const ChatSidebar = () => {
             ) : null
           )}
         </div>
-
-        {/* <form onSubmit={(e) => e.preventDefault() } action="" className='flex items-center gap-2'>
-                <input
-                    value={search}
-                    onChange={(e)=>setSearch(e.target.value)}
-                    className='input input-bordered rounded-md' type="text"
-                    placeholder='Search...'
-                />
-                <button type='submit' className='btn bg-zinc-700 text-white'>
-                     <BiSearchAlt2 className='w-6 h-6 outline-none'/> 
-                </button>
-            </form>   */}
-
         <div className="overflow-auto flex flex-col">
           <div className=" w-full    overflow-y-auto ">
             {otherUsers?.map((chat) => (
@@ -126,17 +119,15 @@ const ChatSidebar = () => {
                     {onlineUsers.includes(chat._id) ? (
                       <span className="absolute w-2 h-2 bg-green-600 rounded-full left-10  bottom-0"></span>
                     ) : null}
-                    {/* <span className="absolute w-2 h-2  bg-green-600 rounded-full left-9 bottom-0 "></span> */}
                   </div>
 
                   <div>
                     <h4 className="sm:text-sm flex font-semibold dark:text-white text-gray-900">
                       {chat.username}
-                                    {chat.isVerified ? (
-                                                          <MdVerified className="text-blue-800 text-xl pl-1 pt-1" />
-                                                        ) : null}
+                      {chat.isVerified ? (
+                        <MdVerified className="text-blue-800 text-xl pl-1 pt-1" />
+                      ) : null}
                     </h4>
-                    {/* <div className="text-[12px]">Hello Lauren 👋, · 24 Mar</div> */}
                   </div>
                 </div>
               </button>

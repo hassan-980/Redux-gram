@@ -27,14 +27,13 @@ import toast from "react-hot-toast";
 function Navbar() {
   const [darkmode, setdarkmode] = useState("");
   const dispatch = useDispatch();
-  const { loading, loggedIn, username, authuser } = useSelector(
+  const { loading, loggedIn,  authuser } = useSelector(
     (state) => state.auth
   );
   const { skip, limit } = useSelector((state) => state.post);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Load from localStorage on mount
     const savedMode = localStorage.getItem("savedmode");
     if (savedMode === "true") {
       setdarkmode(true);
@@ -65,13 +64,11 @@ function Navbar() {
 
 
   useEffect(() => {
-    // setloading(true);
     axios
       .get(`${import.meta.env.VITE_SERVER_URL}/api/user/get-all-users`, {
         withCredentials: true,
       })
       .then((res) => {
-        // setChats(res.data.users);
         dispatch(setOtherUsers(res.data.users));
       })
 
@@ -159,7 +156,7 @@ function Navbar() {
                 to="/profile"
                 className="flex items-center  px-1.5 p-1 border rounded-full "
               >
-                <p className="text-sm font-medium px-1">{username}</p>
+                <p className="text-sm font-medium px-1">{authuser.username}</p>
 
                 <FaUserCircle className="sm:text-2xl text-sm" />
               </Link>

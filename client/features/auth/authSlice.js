@@ -3,24 +3,17 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 import socket from "../../utils/socket";
 import toast from "react-hot-toast";
-
-// const URL='https://redux-gram-server.onrender.com';
-
 const URL = import.meta.env.VITE_SERVER_URL;
-
 
 
 export const fetchUser = createAsyncThunk(
   "auth/fetchUser",
   async (_, thunkAPI) => {
     try {
-      const res = await axios.get(
-        `${URL}/api/user/get-user-data`,
-        {
-          withCredentials: true,
-        }
-      );
-      if(res.data.success){
+      const res = await axios.get(`${URL}/api/user/get-user-data`, {
+        withCredentials: true,
+      });
+      if (res.data.success) {
         toast.success("Login successful");
       }
 
@@ -35,15 +28,11 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }, thunkAPI) => {
     try {
-      const response = await axios.post(
-        `${URL}/api/auth/login`,
-        {
-          email,
-          password,
-        }
-      );
-    toast.success("Login successful");
-    fetchUser();
+      const response = await axios.post(`${URL}/api/auth/login`, {
+        email,
+        password,
+      });
+      toast.success("Login successful");
       return response.data;
     } catch (error) {
       toast.error(error.response.data.message);
@@ -55,12 +44,9 @@ export const verifyEmail = createAsyncThunk(
   "auth/verifyEmail",
   async (otp, thunkAPI) => {
     try {
-      const res = await axios.post(
-        `${URL}/api/auth/verify-email`,
-        {
-          otp,
-        }
-      );
+      const res = await axios.post(`${URL}/api/auth/verify-email`, {
+        otp,
+      });
 
       return res.data;
     } catch (error) {
@@ -111,7 +97,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     const res = await axios.post(
       `${URL}/api/auth/logout`,
       {},
-      { withCredentials: true } 
+      { withCredentials: true }
     );
     toast.success("Logout successful");
     return res.data;
@@ -124,12 +110,12 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 
 export const sendResetPassOtp = createAsyncThunk(
   "auth/sendResetPassOtp",
-  async ({email}, thunkAPI) => {
+  async ({ email }, thunkAPI) => {
     try {
       const res = await axios.post(
         `${URL}/api/auth/send-reset-otp`,
-        {email}, 
-        { withCredentials: true } 
+        { email },
+        { withCredentials: true }
       );
       return res.data;
     } catch (err) {
@@ -140,34 +126,23 @@ export const sendResetPassOtp = createAsyncThunk(
   }
 );
 
-
-
 export const setNewPass = createAsyncThunk(
   "auth/setNewPass",
-  async ({email,otp,newpassword}, thunkAPI) => {
+  async ({ email, otp, newpassword }, thunkAPI) => {
     try {
       const res = await axios.post(
         `${URL}/api/auth/verify-reset-otp`,
-        {email,otp,newpassword}, 
+        { email, otp, newpassword },
         { withCredentials: true }
-
       );
       return res.data;
-
-
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.response?.data?.message || "OTP send failed"
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "OTP send failed"
       );
     }
   }
 );
-
-
-
-
-
-
-
 
 const authSlice = createSlice({
   name: "auth",
@@ -177,13 +152,12 @@ const authSlice = createSlice({
     loading: false,
     error: null,
     isverified: null,
-    success:null,
-    authuser:null
+    success: null,
+    authuser: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-
       //LOGIN
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
@@ -192,7 +166,8 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.loggedIn = true;
-        state.username = action.payload.username;
+        state.authuser = action.payload.userData;
+
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
@@ -206,7 +181,7 @@ const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
         state.loggedIn = true;
-        state.username = action.payload.user.username;
+        state.authuser = action.payload.userData;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
@@ -220,6 +195,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.loggedIn = false;
         state.username = null;
+        state.authuser = null;
       })
       .addCase(logout.rejected, (state, action) => {
         state.loading = false;
@@ -254,11 +230,8 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = null;
       })
-
-     
-      
       // SEND OTP FOR RESET PASS
-            .addCase(sendResetPassOtp.pending, (state) => {
+      .addCase(sendResetPassOtp.pending, (state) => {
         state.loading = true;
       })
       .addCase(sendResetPassOtp.fulfilled, (state, action) => {
@@ -272,7 +245,6 @@ const authSlice = createSlice({
         state.error = action.payload.message;
         state.success = action.payload.success;
       })
-
       // RESET NEW PASS
       .addCase(setNewPass.pending, (state) => {
         state.loading = true;
@@ -285,8 +257,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
-      
-
   },
 });
 

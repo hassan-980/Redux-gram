@@ -50,6 +50,8 @@ function Post({ post }) {
               <div className="w-full flex sm:mt-0 mt-2 mb-2 sm:mb-0 sm:mr-4">
                <img
                   className="rounded-full max-w-none sm:w-12 sm:h-12 w-10 h-10 object-cover"
+
+          
                   src={ 
 
                     `${URL}/api/user/get-profile-pic/${post.userId}`

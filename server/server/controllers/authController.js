@@ -41,16 +41,21 @@ export const register = async (req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-        //  secure: true, // Only send over HTTPS
-        //  sameSite: "None", // "None" required for cross-origin cookies
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        
+        maxAge: 7 * 24 * 60 * 60 * 1000, 
       })
       .json({
-        user: {
-          id: newUser._id,
-          email: newUser.email,
-          username: newUser.username,
-        },
+
+        success: true,
+        message: "Registration successful",
+
+        userData: {
+        username: newUser.username,
+        isVerified: newUser.isVerified,
+        id: newUser._id,
+        profilePic: newUser.profilePic,
+      }
+       
       });
 
     //sending welcome email
@@ -64,7 +69,7 @@ export const register = async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
-    return res.json({ success: true, message: "Registration successful" });
+   
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
@@ -80,7 +85,7 @@ export const login = async (req, res) => {
   }
 
   try {
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ email },{'profilePic.data':0});
 
     if (!user) {
       return res.status(400).json({ success: false, message: "Invalid email" });
@@ -103,11 +108,18 @@ export const login = async (req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "none" : "Lax",
-  //        secure: true, // Only send over HTTPS
-  // sameSite: "None", // "None" required for cross-origin cookies
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        maxAge: 7 * 24 * 60 * 60 * 1000, 
       })
-      .json({ success: true, message: "Login successful", email: user.email, username: user.username });
+      .json({ success: true, message: "Login successful",
+        userData: {
+        username: user.username,
+        isVerified: user.isVerified,
+        email: user.email,
+        id: user._id,
+        profilePic: user.profilePic,
+      },
+        
+      });
 
 
   } catch (error) {

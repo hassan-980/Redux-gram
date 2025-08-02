@@ -10,7 +10,7 @@ import { TiUpload } from "react-icons/ti";
 import { FaPlusCircle } from "react-icons/fa";
 import Footer from "../Footer/Footer";
 import Loader from "../Loader";
-   import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 
 import axios from "axios";
 function Profile() {
@@ -19,32 +19,26 @@ function Profile() {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [error, seterror] = useState(false);
-   const [loading, setloading] = useState(false);
-
-
+  const [loading, setloading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setloading(true);
-
     const data = new FormData();
     data.append("image", imageFile);
-
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/user/update-profile-pic`,
-        data,
-        {
-          withCredentials: true,
-        }
-      )      .then( () => {
+      const res = await axios
+        .post(
+          `${import.meta.env.VITE_SERVER_URL}/api/user/update-profile-pic`,
+          data,
+          {
+            withCredentials: true,
+          }
+        )
+        .then(() => {
           setloading(false);
-  seterror(true);
-  toast.success("Profile Picture updated successfully");
-   
-
-          
-        })
-
+          seterror(true);
+          toast.success("Profile Picture updated successfully");
+        });
     } catch (error) {
       console.log(error);
       setloading(false);
@@ -53,7 +47,7 @@ function Profile() {
 
   return (
     <>
-    {loading ? <Loader></Loader> : null}
+      {loading ? <Loader></Loader> : null}
       <div
         className={` ${
           isUpdate && "hidden"
@@ -158,7 +152,7 @@ function Profile() {
             <div className=" -mt-20 w-full flex justify-center">
               <div className="h-32 w-32">
                 <div className="relative">
-                  {authuser && (
+                  {authuser?.profilePic.contentType ? (
                     <img
                       src={`${
                         import.meta.env.VITE_SERVER_URL
@@ -168,6 +162,12 @@ function Profile() {
                       }}
                       alt="Profile"
                       className=" rounded-full object-cover w-32 h-32  shadow-2xl"
+                    />
+                  ) : (
+                    <img
+                      className="rounded-full object-cover w-32 h-32  shadow-2xl   "
+                      src="/avatar.jpg"
+                      alt="image"
                     />
                   )}
 
@@ -182,9 +182,11 @@ function Profile() {
 
             <div className="flex items-center p-6 sm:mt-5 flex-col ">
               <div className="flex">
-                <h3 className="text-xl mr-2  font-extrabold ">{username}</h3>
+                <h3 className="text-xl mr-2  font-extrabold ">
+                  {authuser?.username}
+                </h3>
 
-                {isverified ? (
+                {authuser?.isVerified ? (
                   <MdVerified className="text-blue-800 text-2xl pl-1 mt-1" />
                 ) : (
                   <Link

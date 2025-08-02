@@ -1,5 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-// import { Socket } from "socket.io-client";
 
 const userSlice = createSlice({
     name:"user",

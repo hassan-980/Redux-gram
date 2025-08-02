@@ -35,17 +35,10 @@ export const messageSlice = createSlice({
       if (msg) msg.seen = true;
     },
     updateMessageId: (state, action) => {
-        const { tempId, id } = action.payload;
-      const msg = state.messages.find(msg => msg._id === tempId);
+      const { tempId, id } = action.payload;
+      const msg = state.messages.find((msg) => msg._id === tempId);
       if (msg) msg._id = id;
-      console.log("done", msg)
-    //   if (index !== -1) {
-    //     state.messages[index] = newMessage;
-    //   }
-    //   const msg = state.messages.find((m) => m._id === action.payload._id);
-    //   if (msg) msg.message = action.payload.message;
     },
-
   },
   extraReducers: (builder) => {
     builder
@@ -63,5 +56,6 @@ export const messageSlice = createSlice({
   },
 });
 
-export const { setMessages, setNewMessage, updateSeen,updateMessageId } = messageSlice.actions;
+export const { setMessages, setNewMessage, updateSeen, updateMessageId } =
+  messageSlice.actions;
 export default messageSlice.reducer;
