@@ -21,7 +21,7 @@ const ChatSidebar = () => {
       >
         <h2 className="text-xl dark:text-white font-bold  mb-4">Chats</h2>
 
-        <div className="flex items-center w-full mb-3 ">
+        <div className="flex relative items-center w-full mb-3 ">
           <div className="flex   pl-2  w-full  border dark:border-white rounded-full px-1  py-1">
             <input
               type="text"
@@ -29,12 +29,12 @@ const ChatSidebar = () => {
               placeholder="search here"
             />
           </div>
-          <button className="text-xl dark:text-white cursor-pointer ml-2">
+          <button className="text-xl absolute right-5 z-30 dark:text-white cursor-pointer ml-2">
             <FaSearch />
           </button>
         </div>
 
-        <div className="flex mb-2 overflow-auto  ">
+        <div className="flex mb-2 sm:h-27  overflow-y-auto  hide-scrollbar  ">
           {
             <div className="relative ">
 
@@ -63,7 +63,12 @@ const ChatSidebar = () => {
               <span className="absolute w-3 h-3 bg-green-600 rounded-full left-13  bottom-0"></span>
             </div>
           }
+        
 
+
+
+
+    
           {otherUsers?.map((chat) =>
             onlineUsers.includes(chat._id) ? (
               <div key={chat._id} className="relative ml-2">
@@ -79,7 +84,7 @@ const ChatSidebar = () => {
                   <img
                     src="/avatar.jpg"
                     alt="Profile"
-                    className=" rounded-full object-cover w-17 h-17  "
+                    className=" rounded-full object-cover  w-17 h-17  "
                   />
                 )}
 
@@ -88,9 +93,11 @@ const ChatSidebar = () => {
             ) : null
           )}
         </div>
-        <div className="overflow-auto flex flex-col">
+        <div className="overflow-auto hide-scrollbar sm:h-full flex flex-col">
           <div className=" w-full    overflow-y-auto ">
             {otherUsers?.map((chat) => (
+
+           
               <button
                 key={chat._id}
                 className="w-full text-left mt-1 py-2 dark:bg-gray-600 bg-gray-300 hover:bg-gray-400 cursor-pointer  rounded-xl"
@@ -102,7 +109,7 @@ const ChatSidebar = () => {
                   <div className="relative ">
                     {chat.profilePic.contentType ? (
                       <img
-                        className="rounded-full  w-10 h-10 items-start mx-3   "
+                        className="rounded-full object-cover  w-10 h-10 items-start mx-3   "
                         src={`${
                           import.meta.env.VITE_SERVER_URL
                         }/api/user/get-profile-pic/${chat._id}`}
@@ -110,7 +117,7 @@ const ChatSidebar = () => {
                       />
                     ) : (
                       <img
-                        className="rounded-full  w-10 h-10 items-start mx-3   "
+                        className="rounded-full object-cover   w-10 h-10 items-start mx-3   "
                         src="/avatar.jpg"
                         alt="image"
                       />
@@ -131,6 +138,8 @@ const ChatSidebar = () => {
                   </div>
                 </div>
               </button>
+             
+         
             ))}
           </div>
         </div>
