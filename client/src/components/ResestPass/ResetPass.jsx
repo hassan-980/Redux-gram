@@ -1,13 +1,10 @@
-
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { useNavigate } from "react-router";
-
-import { sendResetPassOtp, setNewPass } from "../../../features/auth/authSlice";
+import { sendResetPassOtp } from "../../../features/auth/authSlice";
 
 function ResetPass() {
-  const { loading, error, user, loggedIn, isverified, success } = useSelector(
+  const {  error, success } = useSelector(
     (state) => state.auth
   );
   const navigate = useNavigate();

@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import toast from "react-hot-toast";
 axios.defaults.withCredentials = true;
-
 const URL = import.meta.env.VITE_SERVER_URL;
 
 export const createPost = createAsyncThunk(

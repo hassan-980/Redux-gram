@@ -1,23 +1,21 @@
-import { FcGoogle,FcOk } from "react-icons/fc";
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { registerUser}  from '../../../features/auth/authSlice';
-import { Link } from 'react-router';
-import { useNavigate } from 'react-router';
+import { FcGoogle, FcOk } from "react-icons/fc";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../../features/auth/authSlice";
+import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import Loader from "../Loader";
 import Footer from "../Footer/Footer";
 
 function Signup() {
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loggedIn,   loading, error} = useSelector((state) => state.auth);
+  const { loggedIn, loading, error } = useSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) =>
@@ -28,32 +26,19 @@ function Signup() {
     dispatch(registerUser(formData));
   };
 
-
-
-
   useEffect(() => {
     if (loggedIn) {
-      navigate('/');
+      navigate("/");
     }
   }, [loggedIn]);
 
-
-
-
-
   return (
     <>
+      {loading ? <Loader></Loader> : null}
 
-     {loading ? (<Loader></Loader>) : null }
-
-
-  
       <div className="bg-white dark:bg-black dark:text-white flex min-h-screen flex-col items-center  sm:justify-center sm:pt-0">
         <div className="relative mt-12 w-full max-w-lg sm:mt-10">
-          <div
-            className="relative -mb-px h-px w-full "
-          
-          ></div>
+          <div className="relative -mb-px h-px w-full "></div>
           <div className="mx-5 border dark:border-white/50 border-black/80  rounded-lg   lg:rounded-xl ">
             <div className="flex flex-col sm:p-6 p-4">
               <h3 className="text-xl font-semibold leading-6 tracking-tighter">
@@ -62,7 +47,7 @@ function Signup() {
               <p className="mt-1.5 text-sm font-medium text-gray-400">
                 Welcome, enter your credentials to continue.
               </p>
-               {error && <p className="text-red-500">{error}</p>}
+              {error && <p className="text-red-500">{error}</p>}
             </div>
             <div className="sm:p-6 p-4 pt-0">
               <form onSubmit={handleSubmit}>
@@ -133,7 +118,7 @@ function Signup() {
                   </label>
                   <Link
                     className="text-sm font-medium text-foreground underline"
-                    to="/reset"
+                    to={"/reset-pass"}
                   >
                     Forgot password?
                   </Link>
@@ -143,28 +128,25 @@ function Signup() {
                     className="font-semibold bg-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white hover:ring hover:ring-black dark:hover:ring-white transition duration-600 inline-flex items-center justify-center rounded-md text-sm focus-visible:ring-offset-2  text-white hover:bg-white hover:text-black h-10 px-4 py-2 w-full cursor-pointer"
                     type="submit"
                   >
-                     {loading ? 'Registering...' : 'Register'}
+                    {loading ? "Registering..." : "Register"}
                   </button>
                 </div>
               </form>
               <div className="text-center">
-
-
-             <p className="mt-2 mb-2 text-sm font-medium text-white/50 ">or Signup using Google</p>
+                <p className="mt-2 mb-2 text-sm font-medium text-white/50 ">
+                  or Signup using Google
+                </p>
               </div>
 
-                <button
-                    className="font-semibold bg-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white hover:ring hover:ring-black dark:hover:ring-white transition duration-600 inline-flex items-center justify-center rounded-md text-sm focus-visible:ring-offset-2  text-white hover:bg-white hover:text-black h-10 px-4 py-2 w-full cursor-pointer"
-                    type="submit"
-                  >
-                    Google <FcGoogle className="ml-2"  />
-                  </button>
-
+              <button
+                className="font-semibold bg-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white hover:ring hover:ring-black dark:hover:ring-white transition duration-600 inline-flex items-center justify-center rounded-md text-sm focus-visible:ring-offset-2  text-white hover:bg-white hover:text-black h-10 px-4 py-2 w-full cursor-pointer"
+                type="submit"
+              >
+                Google <FcGoogle className="ml-2" />
+              </button>
             </div>
           </div>
-                 
         </div>
-
       </div>
       <Footer></Footer>
     </>
@@ -172,102 +154,3 @@ function Signup() {
 }
 
 export default Signup;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { useState, useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { registerUser}  from '../../../features/auth/authSlice';
-// import { Link } from 'react-router';
-// import { useNavigate } from 'react-router';
-
-// const Register = () => {
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-//   const { loggedIn,   loading, error} = useSelector((state) => state.auth);
-
-//   const [formData, setFormData] = useState({
-//     username: '',
-//     email: '',
-//     password: '',
-//   });
-
-//   const handleChange = (e) =>
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log(formData);
-//     dispatch(registerUser(formData));
-//   };
-
-
-
-
-//   useEffect(() => {
-//     if (loggedIn) {
-//       console.log(loggedIn)
-//       navigate('/');
-//     }
-//   }, [loggedIn]);
-
-
-
-
-//   return (
-//     <div className="max-w-sm mx-auto mt-20">
-//       <h2 className="text-2xl font-bold mb-4">Register</h2>
-//       <form onSubmit={handleSubmit} className="space-y-4">
-//         <input
-//           type="text"
-//           name="username"
-//           placeholder="Username"
-//           onChange={handleChange}
-//           className="w-full p-2 border rounded"
-//         />
-//         <input
-//           type="email"
-//           name="email"
-//           placeholder="Email"
-//           onChange={handleChange}
-//           className="w-full p-2 border rounded"
-//         />
-//         <input
-//           type="password"
-//           name="password"
-//           placeholder="Password"
-//           onChange={handleChange}
-//           className="w-full p-2 border rounded"
-//         />
-//         <button
-//           type="submit"
-//           disabled={loading}
-//           className="w-full bg-green-600 text-white py-2 rounded"
-//         >
-//           {loading ? 'Registering...' : 'Register'}
-//         </button>
-//         {error && <p className="text-red-500">{error}</p>}
-//       </form>
-//       <p className="text-sm mt-2">
-//         Already have an account? <Link to="/">Login</Link>
-//       </p>
-//     </div>
-//   );
-// };
-
-// export default Register;

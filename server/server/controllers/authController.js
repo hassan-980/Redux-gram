@@ -3,7 +3,6 @@ import bcrypt from "bcryptjs";
 import userModel from "../config/models/userModel.js";
 import transporter from "../config/nodemailer.js";
 
-
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -41,21 +40,19 @@ export const register = async (req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-        
-        maxAge: 7 * 24 * 60 * 60 * 1000, 
+
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .json({
-
         success: true,
         message: "Registration successful",
 
         userData: {
-        username: newUser.username,
-        isVerified: newUser.isVerified,
-        id: newUser._id,
-        profilePic: newUser.profilePic,
-      }
-       
+          username: newUser.username,
+          isVerified: newUser.isVerified,
+          id: newUser._id,
+          profilePic: newUser.profilePic,
+        },
       });
 
     //sending welcome email
@@ -68,8 +65,6 @@ export const register = async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-
-   
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
@@ -85,7 +80,7 @@ export const login = async (req, res) => {
   }
 
   try {
-    const user = await userModel.findOne({ email },{'profilePic.data':0});
+    const user = await userModel.findOne({ email }, { "profilePic.data": 0 });
 
     if (!user) {
       return res.status(400).json({ success: false, message: "Invalid email" });
@@ -108,20 +103,19 @@ export const login = async (req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "none" : "Lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000, 
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       })
-      .json({ success: true, message: "Login successful",
+      .json({
+        success: true,
+        message: "Login successful",
         userData: {
-        username: user.username,
-        isVerified: user.isVerified,
-        email: user.email,
-        id: user._id,
-        profilePic: user.profilePic,
-      },
-        
+          username: user.username,
+          isVerified: user.isVerified,
+          email: user.email,
+          id: user._id,
+          profilePic: user.profilePic,
+        },
       });
-
-
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
@@ -133,8 +127,6 @@ export const logout = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-  //      secure: true, // Only send over HTTPS
-  // sameSite: "None", // "None" required for cross-origin cookies
     });
 
     return res.json({ success: true, message: "Logout successful" });
@@ -152,11 +144,10 @@ export const sendVerifyOtp = async (req, res) => {
       return res.json({ success: false, message: "Account already verified" });
     }
 
-    const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate a 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString(); 
 
     user.verifyOtp = otp;
-    user.verifyOtpExpires = Date.now() + 10 * 60 * 1000; // OTP valid for 10 minutes
-
+    user.verifyOtpExpires = Date.now() + 10 * 60 * 1000;
     await user.save();
 
     // Send OTP email
@@ -248,10 +239,10 @@ export const sendResetOtp = async (req, res) => {
       return res.json({ success: false, message: "User not found" });
     }
 
-    const otp = String(Math.floor(100000 + Math.random() * 900000)); // Generate a 6-digit OTP
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
 
     user.resetOtp = otp;
-    user.resetOtpExpires = Date.now() + 10 * 60 * 1000; // OTP valid for 10 minutes
+    user.resetOtpExpires = Date.now() + 10 * 60 * 1000;
 
     await user.save();
 
@@ -285,7 +276,6 @@ export const resetPassword = async (req, res) => {
     return res.status(400).json({ success: false, message: "Missing Details" });
   }
 
-
   try {
     const user = await userModel.findOne({ email });
 
@@ -317,5 +307,3 @@ export const resetPassword = async (req, res) => {
     return res.json({ success: false, message: error.message });
   }
 };
-
-

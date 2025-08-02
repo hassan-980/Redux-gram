@@ -2,8 +2,6 @@ import express from "express";
 import upload from "../middleware/upload.js";
 import userAuth from "../middleware/userAuth.js";
 
-
-
 import {
   createPost,
   getImage,

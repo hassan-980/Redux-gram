@@ -8,10 +8,7 @@ import { useRef } from "react";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { setSelectedUser } from "../../../features/users/userSlice";
 import { MdVerified } from "react-icons/md";
-import {
-  setNewMessage,
-  updateSeen,
-} from "../../../features/messages/messageSlice";
+import {setNewMessage,updateSeen} from "../../../features/messages/messageSlice";
 import axios from "axios";
 const ChatWindow = () => {
   const { selectedUser, onlineUsers } = useSelector((store) => store.user);
@@ -19,9 +16,7 @@ const ChatWindow = () => {
   const { authuser } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const messagesEndRef = useRef(null);
-
   fetchMessages();
-
   socket.on("getSeenId", (id) => {
     dispatch(updateSeen(id.id.id));
   });
@@ -134,153 +129,83 @@ const ChatWindow = () => {
             <div className="">
               <ul className="space-y-2">
                 {messages?.map((data) => (
-
                   <div className="">
-
-                     {/* <li
-                    ref={messagesEndRef}
-                    key={data._id}
-                    className={
-                      "flex flex-col mb-4  " +
-                      (data.senderId === authuser.id
-                        ? "items-end"
-                        : "items-start")
-                    }
-                  >
-                    
-                                        
-                    <div className="relative">
-                      
-                     
-                      <div
-                        className={`max-w-xs flex lg:max-w-md px-4 py-3 rounded-2xl shadow-lg backdrop-blur-sm ${
-                          data.senderId === authuser.id
-                            ? "bg-gradient-to-r from-pink-500  to-rose-500 text-white rounded-br-md"
-                            : "bg-gradient-to-r from-purple-500  to-blue-500 text-white rounded-bl-md"
-                        }`}
-                      >
-                         
-                        <div className="text-sm leading-relaxed">
-                          {data.message}
+                    <li
+                      ref={messagesEndRef}
+                      key={data._id}
+                      className={
+                        "flex flex-col mb-4  " +
+                        (data.senderId === authuser.id
+                          ? "items-end"
+                          : "items-start")
+                      }
+                    >
+                      <div className="relative flex max-w-xs lg:max-w-md">
+                        {data.senderId !== authuser.id ? (
+                          selectedUser?.profilePic.contentType ? (
+                            <img
+                              className="object-cover w-8 h-8 rounded-full mt-2 mx-1"
+                              src={`${
+                                import.meta.env.VITE_SERVER_URL
+                              }/api/user/get-profile-pic/${selectedUser._id}`}
+                              alt="username"
+                            />
+                          ) : (
+                            <img
+                              className="object-cover w-8 h-8 rounded-full mt-2 mr-1   "
+                              src="/avatar.jpg"
+                              alt="image"
+                            />
+                          )
+                        ) : null}
+                        <div
+                          className={`px-4 sm:py-3 py-2 rounded-2xl flex shadow-lg backdrop-blur-sm ${
+                            data.senderId === authuser.id
+                              ? "bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-br-md"
+                              : "bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-bl-md"
+                          }`}
+                        >
+                          <div className="text-sm leading-relaxed">
+                            {data.message}
+                          </div>
+                          <span className="flex text-gray-200 mt-2 ml-2 text-xs">
+                            {data.createdAt.slice(11, 16)}
+                          </span>
                         </div>
-                        <span className="flex    text-gray-200 mt-2 ml-2    text-xs ">
-                          {data.createdAt.slice(11, 16)}
-                        </span>
+                        {data.senderId === authuser.id ? (
+                          authuser?.profilePic.contentType ? (
+                            <img
+                              className="object-cover w-8 h-8 rounded-full mt-2 ml-1"
+                              src={`${
+                                import.meta.env.VITE_SERVER_URL
+                              }/api/user/get-profile-pic/${authuser.id}`}
+                              alt="username"
+                            />
+                          ) : (
+                            <img
+                              className="object-cover w-8 h-8 rounded-full mt-2 ml-1   "
+                              src="/avatar.jpg"
+                              alt="image"
+                            />
+                          )
+                        ) : null}
+
+                        {/* Seen/Delivered Tick */}
+                        {data.senderId === authuser.id && (
+                          <span
+                            className={`absolute right-10 text-xs -bottom-3 ${
+                              data.seen ? "text-blue-600" : "text-gray-400"
+                            }`}
+                          >
+                            <span className="flex">
+                              <TiTick className="-mr-2" />
+                              <TiTick />
+                            </span>
+                          </span>
+                        )}
                       </div>
-
-                      {data.senderId === authuser.id ? (
-                        data.seen === true ? (
-                          <span className=" absolute right-0  text-blue-600 -bottom-3   text-xs ">
-                            <span className="flex">
-                              <TiTick className="-mr-2" />
-                              <TiTick />
-                            </span>
-                          </span>
-                        ) : (
-                          <span className=" absolute right-0 text-gray-400 -bottom-3   text-xs ">
-                            <span className="flex">
-                              <TiTick className="-mr-2" />
-                              <TiTick />
-                            </span>
-                          </span>
-                        )
-                      ) : null}
-                    </div>
-                  </li> */}
-
-                  <li
-  ref={messagesEndRef}
-  key={data._id}
-  className=
-  // {
-  //   "flex  gap-2 mb-4 " +
-  //   (data.senderId === authuser.id ? "justify-end flex-row-reverse" : "justify-start")
-  // }
-  {
-                      "flex flex-col mb-4  " +
-                      (data.senderId === authuser.id
-                        ? "items-end"
-                        : "items-start")
-                    }
->
-  {/* Profile Picture */}
- 
-
-  {/* Message Bubble */}
-  <div className="relative flex max-w-xs lg:max-w-md">
-     {/* <img
-    src={
-      data.senderId === authuser.id
-        ? authuser.profilePic || "/avatar.jpg"
-        : data.senderProfilePic || "/avatar.jpg"
-    }
-    alt="profile"
-    className="w-8 h-8 rounded-full object-cover   shadow-sm"
-  /> */}
-    { data.senderId !== authuser.id ?     selectedUser?.profilePic.contentType ? (
-              <img
-                className="object-cover w-8 h-8 rounded-full mt-2 mx-1"
-                src={`${
-                  import.meta.env.VITE_SERVER_URL
-                }/api/user/get-profile-pic/${selectedUser._id}`}
-                alt="username"
-              />
-            ) : (
-              <img
-                className="object-cover w-8 h-8 rounded-full mt-2 mr-1   "
-                src="/avatar.jpg"
-                alt="image"
-              />
-            ) : null}
-    <div
-      className={`px-4 sm:py-3 py-2 rounded-2xl flex shadow-lg backdrop-blur-sm ${
-        data.senderId === authuser.id
-          ? "bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-br-md"
-          : "bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-bl-md"
-      }`}
-    >
-      <div className="text-sm leading-relaxed">{data.message}</div>
-      <span className="flex text-gray-200 mt-2 ml-2 text-xs">
-        {data.createdAt.slice(11, 16)}
-      </span>
-    </div>
-      { data.senderId === authuser.id ?  (   authuser?.profilePic.contentType ? (
-              <img
-                className="object-cover w-8 h-8 rounded-full mt-2 ml-1"
-                src={`${
-                  import.meta.env.VITE_SERVER_URL
-                }/api/user/get-profile-pic/${authuser.id}`}
-                alt="username"
-              />
-            ) : (
-              <img
-                className="object-cover w-8 h-8 rounded-full mt-2 ml-1   "
-                src="/avatar.jpg"
-                alt="image"
-              />
-            )) : null}
-
-    {/* Seen/Delivered Tick */}
-    {data.senderId === authuser.id && (
-      <span
-        className={`absolute right-10 text-xs -bottom-3 ${
-          data.seen ? "text-blue-600" : "text-gray-400"
-        }`}
-      >
-        <span className="flex">
-          <TiTick className="-mr-2" />
-          <TiTick />
-        </span>
-      </span>
-    )}
-  </div>
-  
-</li>
-
-
+                    </li>
                   </div>
-
-                 
                 ))}
               </ul>
             </div>

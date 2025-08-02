@@ -29,16 +29,10 @@ function Post({ post }) {
         });
 
       toast.success("Post Deleted");
-
     } catch (err) {
       console.error("Delete failed:", err);
     }
   };
-
-
-
-
-
 
   return (
     <>
@@ -48,21 +42,12 @@ function Post({ post }) {
           <div className="flex flex-col   sm:p-6  p-3">
             <div className="flex">
               <div className="w-full flex sm:mt-0 mt-2 mb-2 sm:mb-0 sm:mr-4">
-               <img
+                <img
                   className="rounded-full max-w-none sm:w-12 sm:h-12 w-10 h-10 object-cover"
-
-          
-                  src={ 
-
-                    `${URL}/api/user/get-profile-pic/${post.userId}`
-
-                  }
-
+                  src={`${URL}/api/user/get-profile-pic/${post.userId}`}
                   onError={(e) => {
-
-    e.target.src = "/avatar.jpg";
-
-  }}
+                    e.target.src = "/avatar.jpg";
+                  }}
                 />
                 <div className=" flex flex-col">
                   <span className=" sm:ml-3 sm:pt-1 pt-0 ml-1.5 text-xl flex font-semibold leading-6 tracking-tighter">

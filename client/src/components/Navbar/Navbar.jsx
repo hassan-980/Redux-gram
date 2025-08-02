@@ -27,9 +27,7 @@ import toast from "react-hot-toast";
 function Navbar() {
   const [darkmode, setdarkmode] = useState("");
   const dispatch = useDispatch();
-  const { loading, loggedIn,  authuser } = useSelector(
-    (state) => state.auth
-  );
+  const { loading, loggedIn, authuser } = useSelector((state) => state.auth);
   const { skip, limit } = useSelector((state) => state.post);
   const navigate = useNavigate();
 
@@ -56,12 +54,9 @@ function Navbar() {
     }
   }, [darkmode]);
 
-    useEffect(() => {
+  useEffect(() => {
     dispatch(fetchUser());
   }, [dispatch]);
-
-
-
 
   useEffect(() => {
     axios

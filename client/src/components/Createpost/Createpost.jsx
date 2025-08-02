@@ -1,4 +1,3 @@
-import React, { use } from "react";
 import { Link } from "react-router";
 import { createPost } from "../../../features/posts/postslice";
 import { TiUpload } from "react-icons/ti";
@@ -6,15 +5,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
 import Footer from "../Footer/Footer";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
-
-
 function Createpost() {
-  const { loading, error,} = useSelector((state) => state.post);
+  const { loading, error } = useSelector((state) => state.post);
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const MAX_FILE_SIZE = 3 * 1024 * 1024; // 3 MB
 
@@ -32,23 +27,17 @@ function Createpost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const data = new FormData();
     data.append("title", formData.title);
     data.append("description", formData.description);
     data.append("visibility", formData.visibility);
     data.append("image", imageFile);
-     dispatch(createPost(data))
+    dispatch(createPost(data));
     navigate("/");
-    //  toast.success("Post created successfully");
-
   };
 
-
   return (
-
-    <> 
-
+    <>
       {loading ? <Loader></Loader> : null}
       <div className="bg-white dark:bg-black dark:text-white flex min-h-screen  flex-col items-center  sm:justify-center sm:pt-0">
         <div className="relative mt-5 w-full mb-8  max-w-lg  sm:mt-10">
@@ -60,11 +49,9 @@ function Createpost() {
               <p className="mt-1.5 text-sm  text-gray-400">
                 Welcome , create new post
               </p>
-              {(error === "Post created successfully") ? (
-            
+              {error === "Post created successfully" ? (
                 <p className="text-green-700">{error}</p>
               ) : (
-                // toast.error(error)
                 <p className="text-red-500">{error}</p>
               )}
             </div>
@@ -129,7 +116,7 @@ function Createpost() {
                             return;
                           }
                           if (file.size > MAX_FILE_SIZE) {
-                             alert("Image size should not exceed 3MB");
+                            alert("Image size should not exceed 3MB");
                             return;
                           }
                           if (file) {
@@ -147,7 +134,6 @@ function Createpost() {
                             <span>Drag and drop</span>
                             <span className="text-indigo-600"> or browse </span>
                             <span>to upload</span>
-
                           </label>
                         </h3>
                         <p className="mt-1 text-xs text-gray-500">
@@ -159,10 +145,8 @@ function Createpost() {
                             alt="Preview"
                             className="mt-4 rounded max-h-30 "
                           />
-                          
                         )}
                       </div>
-                          
                     </div>
                   </div>
                 </div>

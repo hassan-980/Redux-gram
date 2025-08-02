@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
 export const getMessages = createAsyncThunk(
   "message/getMessages",
   async (data, thunkAPI) => {

@@ -3,9 +3,8 @@ import socket from "../../../utils/socket";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import {
-  setMessages,
   setNewMessage,
-  updateMessageId
+  updateMessageId,
 } from "../../../features/messages/messageSlice";
 import { GrAttachment } from "react-icons/gr";
 import { IoSend } from "react-icons/io5";
@@ -25,7 +24,7 @@ const MessageInput = () => {
         return;
       }
       const message = msgs;
-       setMessage("");
+      setMessage("");
       const tempId = Date.now().toString();
       const now = new Date();
       dispatch(
@@ -50,39 +49,16 @@ const MessageInput = () => {
       );
 
       const msg = res?.data?.newMessage;
-        dispatch(updateMessageId({ tempId, id: res?.data?.newMessage?._id }));
+      dispatch(updateMessageId({ tempId, id: res?.data?.newMessage?._id }));
       // dispatch(setNewMessage(res?.data?.newMessage));
       console.log(msg);
-      if(msg.receiverId=== selectedUser._id){
-          socket.emit("sendMessage", msg);
+      if (msg.receiverId === selectedUser._id) {
+        socket.emit("sendMessage", msg);
       }
-      
     } catch (error) {
       console.log(error);
     }
-   
   };
-
-  // const handleSend = () => {
-  //   if (text.trim() === "") return;
-
-  //   const msg = {
-  //     senderId: authUser.id,
-  //     receiverId: selectedUser._id,
-  //     text,
-  //   };
-
-  //   socket.emit("sendMessage", msg);
-  //   dispatch(set({ ...msg, self: true }));
-
-  // };
-
-  // const handleSend = () => {
-  //   socket.emit("send_message", message);
-  //   setText("");
-  // };
-  // const onSubmitHandler = async (e) => {
-  // }
 
   return (
     <>
@@ -97,17 +73,8 @@ const MessageInput = () => {
           value={msgs}
           onChange={(e) => setMessage(e.target.value)}
         />
-
         <div className="flex  justify-center items-center mr-3">
           <div className=" relative ">
-            {/* <input
-              type="file"
-              className="absolute inset-0 w-full h-full opacity-0 z-30"
-              name="image"
-              onChange={(e) => {
-                setImageFile(e.target.files[0]);
-              }}
-            /> */}
             <div className="flex flex-col justify-center items-center ">
               <GrAttachment className="text-2xl dark:text-white" />
             </div>

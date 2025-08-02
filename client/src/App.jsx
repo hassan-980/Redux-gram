@@ -10,23 +10,17 @@ import Profile from "./components/Profile/Profile.jsx";
 import Verify from "./components/Login/verification.jsx";
 import ResetPass from "./components/ResestPass/ResetPass.jsx";
 import ResetNewPass from "./components/Login/ResetNewPass.jsx";
-import toast, { Toaster } from 'react-hot-toast';
-
+import toast, { Toaster } from "react-hot-toast";
 
 import Chat from "./components/chat/Chat.jsx";
 
 function App() {
   return (
-
     <>
       <Provider store={store}>
         <BrowserRouter>
           <Navbar />
-           <Toaster
-
-           containerClassName=" m-15"
-           
-           />
+          <Toaster containerClassName=" m-15" />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="profile" element={<Profile />} />
@@ -45,6 +39,3 @@ function App() {
 }
 
 export default App;
-
-
-

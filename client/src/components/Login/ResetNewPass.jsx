@@ -1,16 +1,11 @@
-import React from "react";
-import { FcOk } from "react-icons/fc";
-import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../../features/auth/authSlice";
-import { useNavigate } from "react-router";
 import Loader from "../Loader";
 import { setNewPass } from "../../../features/auth/authSlice";
 
 function ResetNewPass() {
   const dispatch = useDispatch();
-  const { error,loading,success } = useSelector((state) => state.auth);
+  const { error, loading } = useSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -26,7 +21,6 @@ function ResetNewPass() {
 
     dispatch(setNewPass(formData));
   };
-
 
   return (
     <>
@@ -44,7 +38,7 @@ function ResetNewPass() {
               >
                 Enter your registered email for verification
               </p>
-            
+
               <p className="   text-green-500">{error}</p>
             </div>
             <div className="p-6 pt-0">

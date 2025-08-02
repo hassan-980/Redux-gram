@@ -37,38 +37,29 @@ const ChatSidebar = () => {
         <div className="flex mb-2 sm:h-27  overflow-y-auto  hide-scrollbar  ">
           {
             <div className="relative ">
-
-               {authuser?.profilePic.contentType ? (
-                  <img
-                src={`${
-                  import.meta.env.VITE_SERVER_URL
-                }/api/user/get-profile-pic/${authuser.id}`}
-                onError={(e) => {
-                  e.target.src = "/avatar.jpg";
-                }}
-                alt="Profile"
-                className=" rounded-full object-cover w-17 h-17  "
-              />
-                ) : (
-                  <img
-                    src="/avatar.jpg"
-                    alt="Profile"
-                    className=" rounded-full object-cover w-17 h-17  "
-                  />
-                )}
-
-
-
+              {authuser?.profilePic.contentType ? (
+                <img
+                  src={`${
+                    import.meta.env.VITE_SERVER_URL
+                  }/api/user/get-profile-pic/${authuser.id}`}
+                  onError={(e) => {
+                    e.target.src = "/avatar.jpg";
+                  }}
+                  alt="Profile"
+                  className=" rounded-full object-cover w-17 h-17  "
+                />
+              ) : (
+                <img
+                  src="/avatar.jpg"
+                  alt="Profile"
+                  className=" rounded-full object-cover w-17 h-17  "
+                />
+              )}
 
               <span className="absolute w-3 h-3 bg-green-600 rounded-full left-13  bottom-0"></span>
             </div>
           }
-        
 
-
-
-
-    
           {otherUsers?.map((chat) =>
             onlineUsers.includes(chat._id) ? (
               <div key={chat._id} className="relative ml-2">
@@ -96,8 +87,6 @@ const ChatSidebar = () => {
         <div className="overflow-auto hide-scrollbar sm:h-full flex flex-col">
           <div className=" w-full    overflow-y-auto ">
             {otherUsers?.map((chat) => (
-
-           
               <button
                 key={chat._id}
                 className="w-full text-left mt-1 py-2 dark:bg-gray-600 bg-gray-300 hover:bg-gray-400 cursor-pointer  rounded-xl"
@@ -138,8 +127,6 @@ const ChatSidebar = () => {
                   </div>
                 </div>
               </button>
-             
-         
             ))}
           </div>
         </div>

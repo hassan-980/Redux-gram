@@ -3,9 +3,8 @@ import { useSelector } from "react-redux";
 import { MdVerified } from "react-icons/md";
 import { MdOutlineVerified } from "react-icons/md";
 import { Link } from "react-router";
-import { MdOutlineFileUpload } from "react-icons/md";
 import { ImCross } from "react-icons/im";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TiUpload } from "react-icons/ti";
 import { FaPlusCircle } from "react-icons/fa";
 import Footer from "../Footer/Footer";
@@ -14,7 +13,7 @@ import toast from "react-hot-toast";
 
 import axios from "axios";
 function Profile() {
-  const { username, isverified, authuser } = useSelector((state) => state.auth);
+  const { username, authuser } = useSelector((state) => state.auth);
   const [isUpdate, setIsUpdate] = useState(true);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [imageFile, setImageFile] = useState(null);
@@ -65,10 +64,7 @@ function Profile() {
             </div>
 
             <div className="flex justify-center text-center flex-col">
-              <p
-                className="mt-1 text-sm font-bold text-black
-                    "
-              >
+              <p className="mt-1 text-sm font-bold text-black">
                 Update your Profile Pictrue
               </p>
 
@@ -205,7 +201,6 @@ function Profile() {
           </div>
         </div>
       </div>
-
       <ProfilePosts></ProfilePosts>
       <Footer></Footer>
     </>

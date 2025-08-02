@@ -1,5 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 import "dotenv/config";
 import cors from "cors";
@@ -15,9 +14,10 @@ import userRouter from "./server/routes/userRoutes.js";
 import postRoutes from "./server/routes/postRoutes.js";
 import messageRoutes from "./server/routes/messageRoutes.js";
 
-
-
-const allowedOrigins = ["http://localhost:5173","https://reduxgram.vercel.app"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://reduxgram.vercel.app",
+];
 const app = express();
 const server = http.createServer(app);
 
@@ -29,32 +29,6 @@ export const io = new Server(server, {
   },
 });
 
-// Store Online users
-// export const userSocketMap = {}; //{ userId: socketId }
-// let onlineUsers = new Map();
-
-
-
-
-// Socket.io connection handler
-// io.on("connection",(socket=>{
-//   const userId = socket.handshake.query.userId; 
-//   console.log("User connected", userId);  
-
-//   if(userId) userSocketMap[userId] = socket.id;
-
-  // Emit all online users
-//   io.emit("getOnlineUsers", Object.keys(userSocketMap));
-
-//   socket.on("disconnect", () => {
-//     console.log("User Disconnected", userId);  
-//     delete userSocketMap[userId];
-//     io.emit("getOnlineUsers", Object.keys(userSocketMap));
-//   });
-// }))
-
-
-
 let onlineUsers = new Map();
 
 io.on("connection", (socket) => {
@@ -63,28 +37,25 @@ io.on("connection", (socket) => {
   // Save user and socket mapping
   socket.on("addUser", (userId) => {
     onlineUsers.set(userId, socket.id);
-    console.log(onlineUsers)
+    console.log(onlineUsers);
     io.emit("getUsers", Array.from(onlineUsers.keys()));
     // io.emit("getUsers", onlineUsers);
-
   });
 
   // Send message to specific user
-  socket.on("sendMessage", ( msg ) => {
+  socket.on("sendMessage", (msg) => {
     const receiverSocket = onlineUsers.get(msg.receiverId);
     if (receiverSocket) {
       io.to(receiverSocket).emit("getMessage", {
-        msg
+        msg,
       });
     }
   });
 
-  socket.on("seenMessage", ( id ) => {
-
-      io.emit("getSeenId", {
-        id
-      });
-    
+  socket.on("seenMessage", (id) => {
+    io.emit("getSeenId", {
+      id,
+    });
   });
 
   // On disconnect, remove from online map
@@ -116,14 +87,8 @@ app.use("/api/user", userRouter);
 app.use("/api/posts", postRoutes);
 app.use("/api/message", messageRoutes);
 
-
-
-// import socketConnection from "./socket.js";
-// socketConnection(io);
-
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
