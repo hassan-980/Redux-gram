@@ -125,7 +125,7 @@ const ChatWindow = () => {
             )}
           </div>
 
-          <div className="  relative w-full sm:h-[55vh]      h-[calc(100vh-272px)] sm:p-6 p-2  overflow-y-auto hide-scrollbar">
+          <div className="  relative w-full       h-[calc(100vh-272px)] sm:p-6 p-2  overflow-y-auto hide-scrollbar">
             <div className="">
               <ul className="space-y-2">
                 {messages?.map((data) => (

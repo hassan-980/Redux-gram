@@ -12,10 +12,8 @@ import { IoSend } from "react-icons/io5";
 const MessageInput = () => {
   const [msgs, setMessage] = useState("");
   const { selectedUser } = useSelector((store) => store.user);
-  const { messages } = useSelector((store) => store.message);
   const { authuser } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
-  const [image, setImageFile] = useState(null);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -50,7 +48,6 @@ const MessageInput = () => {
 
       const msg = res?.data?.newMessage;
       dispatch(updateMessageId({ tempId, id: res?.data?.newMessage?._id }));
-      // dispatch(setNewMessage(res?.data?.newMessage));
       console.log(msg);
       if (msg.receiverId === selectedUser._id) {
         socket.emit("sendMessage", msg);
