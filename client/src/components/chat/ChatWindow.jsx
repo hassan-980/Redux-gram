@@ -74,7 +74,7 @@ const ChatWindow = () => {
           </h1>
         </div>
       ) : (
-        <div className=" w-full  lg:col-span-2 lg:block ">
+        <div className=" w-full   lg:col-span-2 lg:block ">
           <div className="relative flex items-center p-3 border-b border-gray-300">
             <button
               className="cursor-pointer flex sm:hidden"
