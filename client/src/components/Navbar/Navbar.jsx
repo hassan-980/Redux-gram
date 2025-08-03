@@ -113,7 +113,7 @@ function Navbar() {
           </div>
 
           <div className="flex  items-center ">
-            <div className=" w-2 flex text-2xl ">
+            <div className=" w-6 flex text-2xl ">
               <button
                 className="hover:text-3xl flex items-center cursor-pointer"
                 onClick={() => {
@@ -192,7 +192,7 @@ function Navbar() {
       </div>
 
       {loggedIn ? (
-        <header className="fixed inset-x-0 block backdrop-blur-xl   z-50 bg-transparent mx-auto w-2/3 max-w-screen-md   py-3 shadow  bottom-6 rounded-3xl ">
+        <header className="fixed inset-x-0 block backdrop-blur-xl   z-50 mx-auto w-2/3 max-w-screen-md border border-gray-100 bg-white py-3 shadow  bottom-6 rounded-3xl ">
           <div className="flex items-center   justify-between h-8 ">
             <div className="ml-8  flex justify-center w-3">
               <Link
