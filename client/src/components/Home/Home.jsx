@@ -2,6 +2,7 @@ import Post from "../Post/Post";
 import { useSelector, useDispatch } from "react-redux";
 import { getGlobalPosts } from "../../../features/posts/postslice";
 import Footer from "../Footer/Footer";
+import { useEffect } from "react";
 
 function Home() {
   const dispatch = useDispatch();
@@ -12,12 +13,18 @@ function Home() {
     dispatch(getGlobalPosts({ skip, limit }));
   };
 
+  useEffect(() => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <>
       <div className="  ">
         <div className="dark:bg-black text-white flex min-h-screen flex-col items-center   sm:justify-center sm:pt-0">
           {posts.map((post) => (
-            <Post key={post._id} post={post}></Post>
+            <Post 
+            
+            key={post._id} post={post}></Post>
           ))}
 
           {loading ? (

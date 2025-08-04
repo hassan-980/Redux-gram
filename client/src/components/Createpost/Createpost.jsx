@@ -38,7 +38,9 @@ function Createpost() {
     dispatch(createPost(data))
     .then(() => {
       navigate("/");
-    })
+    }).then(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
    
   };
 

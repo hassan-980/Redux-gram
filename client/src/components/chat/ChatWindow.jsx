@@ -10,6 +10,7 @@ import { setSelectedUser } from "../../../features/users/userSlice";
 import { MdVerified } from "react-icons/md";
 import {setNewMessage,updateSeen} from "../../../features/messages/messageSlice";
 import axios from "axios";
+
 const ChatWindow = () => {
   const { selectedUser, onlineUsers } = useSelector((store) => store.user);
   const { messages } = useSelector((store) => store.message);
