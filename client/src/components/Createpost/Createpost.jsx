@@ -6,12 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
 import Footer from "../Footer/Footer";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 function Createpost() {
   const { loading, error } = useSelector((state) => state.post);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const MAX_FILE_SIZE = 3 * 1024 * 1024; // 3 MB
+  const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4 MB
 
   const [formData, setFormData] = useState({
     title: "",
@@ -33,8 +34,14 @@ function Createpost() {
     data.append("visibility", formData.visibility);
     data.append("image", imageFile);
     dispatch(createPost(data));
-    navigate("/");
   };
+
+  useEffect(() => {
+    if(error === "Post created successfully"){
+      navigate("/");
+    }
+  }, [error])
+  
 
   return (
     <>
@@ -110,13 +117,13 @@ function Createpost() {
                           ];
 
                           if (!validImageTypes.includes(file.type)) {
-                            alert(
+                            toast.error(
                               "Only image files (jpg, png, gif, webp) are allowed"
                             );
                             return;
                           }
                           if (file.size > MAX_FILE_SIZE) {
-                            alert("Image size should not exceed 3MB");
+                            toast.error("Image size should not exceed 4MB");
                             return;
                           }
                           if (file) {
