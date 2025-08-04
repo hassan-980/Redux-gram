@@ -34,17 +34,15 @@ function Createpost() {
     data.append("description", formData.description);
     data.append("visibility", formData.visibility);
     data.append("image", imageFile);
-  
+
     dispatch(createPost(data))
-    .then(() => {
-      navigate("/");
-    }).then(() => {
+      .then(() => {
+        navigate("/");
+      })
+      .then(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
-   
   };
-
-  
 
   return (
     <>
@@ -88,7 +86,7 @@ function Createpost() {
                     <div className="group relative rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
                       <div className="flex justify-between">
                         <label className="text-xs font-medium  dark:group-focus-within:text-white text-gray-400">
-                          bio
+                          Description
                         </label>
                       </div>
                       <div className="flex items-center">
