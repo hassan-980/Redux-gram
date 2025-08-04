@@ -7,6 +7,7 @@ import Loader from "../Loader";
 import Footer from "../Footer/Footer";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 function Createpost() {
   const { loading, error } = useSelector((state) => state.post);
@@ -33,14 +34,14 @@ function Createpost() {
     data.append("description", formData.description);
     data.append("visibility", formData.visibility);
     data.append("image", imageFile);
-    dispatch(createPost(data));
+  
+    dispatch(createPost(data))
+    .then(() => {
+      navigate("/");
+    })
+   
   };
 
-  useEffect(() => {
-    if(error === "Post created successfully"){
-      navigate("/");
-    }
-  }, [error])
   
 
   return (
