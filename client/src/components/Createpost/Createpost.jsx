@@ -48,9 +48,9 @@ function Createpost() {
     <>
       {loading ? <Loader></Loader> : null}
       <div className="bg-white dark:bg-black dark:text-white flex min-h-screen  flex-col items-center  sm:justify-center sm:pt-0">
-        <div className="relative mt-5 w-full mb-8  max-w-lg  sm:mt-10">
+        <div className="relative mt-5 w-full mb-8  max-w-lg sm:-mt-15 ">
           <div className="  mx-5 border dark:border-white/50 border-black/80  rounded-lg  lg:rounded-xl   ">
-            <div className="flex flex-col sm:p-6 p-4">
+            <div className="flex flex-col sm:px-6 p-4">
               <h3 className="text-xl font-semibold  tracking-tighter">
                 New Post
               </h3>
@@ -63,7 +63,7 @@ function Createpost() {
                 <p className="text-red-500">{error}</p>
               )}
             </div>
-            <div className="sm:p-6 p-4 pt-0">
+            <div className="sm:px-6 p-4 pt-0">
               <form onSubmit={handleSubmit}>
                 <div className="group relative rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
                   <div className="flex justify-between">
@@ -95,7 +95,7 @@ function Createpost() {
                           type="text"
                           name="description"
                           placeholder="Describe everything about this post here"
-                          className=" block h-35 w-full border-0 bg-transparent p-0 text-sm   focus:outline-none focus:ring-0 focus:ring-teal-500 placeholder:text-gray-600"
+                          className=" block sm:h-20 h-15 w-full border-0 bg-transparent p-0 text-sm   focus:outline-none focus:ring-0 focus:ring-teal-500 placeholder:text-gray-600"
                         />
                       </div>
                     </div>
