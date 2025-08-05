@@ -84,8 +84,8 @@ const ChatSidebar = () => {
             ) : null
           )}
         </div>
-        <div className="overflow-auto hide-scrollbar sm:h-full flex flex-col">
-          <div className=" w-full    overflow-y-auto ">
+        <div className="overflow-y-auto hide-scrollbar sm:h-full flex flex-col">
+          <div className=" w-full    overflow-y-auto hide-scrollbar ">
             {otherUsers?.map((chat) => (
               <button
                 key={chat._id}

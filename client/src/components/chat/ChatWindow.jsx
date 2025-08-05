@@ -126,8 +126,7 @@ const ChatWindow = () => {
             )}
           </div>
 
-          <div className="  relative w-full       h-[calc(100vh-272px)] sm:p-6 p-2  overflow-y-auto hide-scrollbar">
-            <div className="">
+          <div className="  relative w-full       h-[calc(100dvh-272px)] sm:p-6 p-2  overflow-y-auto hide-scrollbar">
               <ul className="space-y-2">
                 {messages?.map((data) => (
                   <div className="">
@@ -196,8 +195,7 @@ const ChatWindow = () => {
                           <span
                             className={`absolute right-10 text-xs -bottom-3 ${
                               data.seen ? "text-blue-600" : "text-gray-400"
-                            }`}
-                          >
+                            }`}>
                             <span className="flex">
                               <TiTick className="-mr-2" />
                               <TiTick />
@@ -209,9 +207,7 @@ const ChatWindow = () => {
                   </div>
                 ))}
               </ul>
-            </div>
           </div>
-
           <MessageInput />
         </div>
       )}
